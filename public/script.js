@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const elementsRight = document.querySelectorAll('.fade-in-right');
     const elementsTop = document.querySelectorAll('.fade-in-top');
     const elementsBot = document.querySelectorAll('.fade-in-bot');
+    const elementsFade = document.querySelectorAll('.fade');
 
     function checkFade() {
         elementsLeft.forEach(element => {
@@ -21,6 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         elementsBot.forEach(element => {
+            if (isElementInViewport(element)) {
+                element.classList.add('active');
+            }
+        });
+        elementsFade.forEach(element => {
             if (isElementInViewport(element)) {
                 element.classList.add('active');
             }

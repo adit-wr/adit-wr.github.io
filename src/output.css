@@ -974,28 +974,33 @@ video {
 .fade-in-left {
   opacity: 0;
   transform: translateX(-50px);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 2s ease, transform 3s ease;
 }
 
 .fade-in-right {
   opacity: 0;
   transform: translateX(50px);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 2s ease, transform 2s ease;
 }
 
 .fade-in-top {
   opacity: 0;
   transform: translateY(-50px);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 2s ease, transform 2s ease;
 }
 
 .fade-in-bot {
   opacity: 0;
   transform: translateY(50px);
-  transition: opacity 1s ease, transform 1s ease;
+  transition: opacity 2s ease, transform 3s ease;
 }
 
-.fade-in-left.active, .fade-in-right.active, .fade-in-top.active, .fade-in-bot.active {
+.fade {
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.fade-in-left.active, .fade-in-right.active, .fade-in-top.active, .fade-in-bot.active, .fade.active {
   opacity: 1;
   transform: translateX(0);
 }
@@ -1085,10 +1090,6 @@ video {
     gap: 1.25rem;
   }
 
-  .mbl\:gap-8 {
-    gap: 2rem;
-  }
-
   .mbl\:p-0 {
     padding: 0px;
   }
@@ -1121,6 +1122,10 @@ video {
 
   .mbl\:pt-4 {
     padding-top: 1rem;
+  }
+
+  .mbl\:pt-8 {
+    padding-top: 2rem;
   }
 
   .mbl\:text-2xl {
