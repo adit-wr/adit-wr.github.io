@@ -990,6 +990,48 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@media (max-width: 500px) {
+  .mbl\:container {
+    width: 100%;
+  }
+
+  @media (min-width: 500px) {
+    .mbl\:container {
+      max-width: 500px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .mbl\:container {
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .mbl\:container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mbl\:container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .mbl\:container {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .mbl\:container {
+      max-width: 1536px;
+    }
+  }
+}
+
 .hover\:scale-110:hover {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
@@ -1136,6 +1178,11 @@ video {
   .mbl\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  .mbl\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .mbl\:font-normal {
