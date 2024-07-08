@@ -8,11 +8,36 @@
   <title>Cyatria | About</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in-top {
+      opacity: 0;
+      transform: translateY(-50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in-bot {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in-left.active, .fade-in-right.active, .fade-in-top.active, .fade-in-bot.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
   </style>
+  <script src="./script.js"></script>
 </head>
 <body class="bg-slate-950 flex w-full h-full text-white mbl:flex-col mbl:items-center">
   <!-- navbar -->
-  <div class="flex justify-between mbl:justify-center font-poppins backdrop-blur-md fixed top-0 w-screen h-16 mbl:h-12 mbl:bottom-0 mbl:top-auto">
+  <div class="flex justify-between mbl:justify-center font-poppins backdrop-blur-md fixed z-50 top-0 w-screen h-16 mbl:h-12 mbl:bottom-0 mbl:top-auto">
     <div class="flex items-center font-semibold text-2xl">
       <h1 class="pl-10 cursor-pointer mbl:hidden">Cyatria Wichaksana Ristanto</h1>
     </div>
@@ -74,14 +99,14 @@
         <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3">Programming Language</h1>
       </div>
       <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/php.png" alt="" class="h-40 mbl:h-16 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/html.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/css.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/js.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/python.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/csharp.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/dart.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/swift.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
+        <img src="./img/php.png" alt="" class="h-40 mbl:h-16 fade-in-top cursor-pointer">
+        <img src="./img/html.png" alt="" class="h-44 mbl:h-24 fade-in-left cursor-pointer">
+        <img src="./img/css.png" alt="" class="h-44 mbl:h-24 fade-in-right cursor-pointer">
+        <img src="./img/js.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
+        <img src="./img/python.png" alt="" class="h-44 mbl:h-24 fade-in-right cursor-pointer">
+        <img src="./img/csharp.png" alt="" class="h-44 mbl:h-24 fade-in-left cursor-pointer">
+        <img src="./img/dart.png" alt="" class="h-44 mbl:h-24 fade-in-top cursor-pointer">
+        <img src="./img/swift.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
       </div>
     </div>
     <div class="flex flex-col justify-between">
@@ -89,13 +114,13 @@
         <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3">Frame Work</h1>
       </div>
       <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/laravel.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/tailwind.png" alt="" class="h-40 mbl:h-16 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/bootstrap.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/react.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/flutter.png" alt="" class="h-44 mbl:h-20 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/codeigniter.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/nodejs.png" alt="" class="h-44 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
+        <img src="./img/laravel.png" alt="" class="h-44 mbl:h-24 fade-in-left cursor-pointer">
+        <img src="./img/tailwind.png" alt="" class="h-40 mbl:h-16 fade-in-right cursor-pointer">
+        <img src="./img/bootstrap.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
+        <img src="./img/react.png" alt="" class="h-44 mbl:h-24 fade-in-right cursor-pointer">
+        <img src="./img/flutter.png" alt="" class="h-44 mbl:h-20 fade-in-left cursor-pointer">
+        <img src="./img/codeigniter.png" alt="" class="h-44 mbl:h-24 fade-in-top cursor-pointer">
+        <img src="./img/nodejs.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
       </div>
     </div>
     <div class="flex flex-col justify-between">
@@ -103,8 +128,8 @@
         <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3">Database</h1>
       </div>
       <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/mysql.png" alt="" class="h-52 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/posgres.png" alt="" class="h-52 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
+        <img src="./img/mysql.png" alt="" class="h-52 mbl:h-24 fade-in-left cursor-pointer">
+        <img src="./img/posgres.png" alt="" class="h-52 mbl:h-24 fade-in-right cursor-pointer">
       </div>
     </div>
     <div class="flex flex-col justify-between">
@@ -112,11 +137,11 @@
         <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3">Tools</h1>
       </div>
       <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/figma.png" alt="" class="h-52 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/ea.png" alt="" class="h-52 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/trello.png" alt="" class="h-52 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/tinkercad.png" alt="" class="h-52 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
-        <img src="./img/drawio.png" alt="" class="h-52 mbl:h-24 cursor-pointer ltp:hover:scale-125 ease-in-out duration-500">
+        <img src="./img/figma.png" alt="" class="h-52 mbl:h-24 fade-in-left cursor-pointer">
+        <img src="./img/ea.png" alt="" class="h-52 mbl:h-24 fade-in-top cursor-pointer">
+        <img src="./img/trello.png" alt="" class="h-52 mbl:h-24 fade-in-right cursor-pointer">
+        <img src="./img/tinkercad.png" alt="" class="h-52 mbl:h-24 fade-in-left cursor-pointer">
+        <img src="./img/drawio.png" alt="" class="h-52 mbl:h-24 fade-in-bot cursor-pointer">
       </div>
     </div>
   </div>
