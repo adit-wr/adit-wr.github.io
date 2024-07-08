@@ -7,8 +7,8 @@ module.exports = {
         'poppins': ['Poppins', 'sans-serif']
       },
       screens: {
-        'mbl': { 'max': '500px' },
-        'ltp': { 'min': '501px' },
+        'mbl': { 'max': '900px' },
+        'ltp': { 'min': '901px' },
       },
     },
   },
