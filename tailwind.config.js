@@ -6,8 +6,11 @@ module.exports = {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif']
       },
+      screens: {
+        'mbl': { 'max': '500px' },
+        'ltp': { 'min': '500px' },
+      },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-hamburgers')],
 }
-
