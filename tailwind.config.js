@@ -8,7 +8,7 @@ module.exports = {
       },
       screens: {
         'mbl': { 'max': '500px' },
-        'ltp': { 'min': '500px' },
+        'ltp': { 'min': '501px' },
       },
     },
   },
