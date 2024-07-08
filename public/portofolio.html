@@ -5,58 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/src/output.css">
   <link rel="icon" href="./img/adit.jpg">
-  <title>Personal Website</title>
+  <title>Cyatria | Portofolio</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
   </style>
 </head>
 <body class="bg-gray-950 flex w-full h-full text-white">
   <!-- navbar -->
-  <div class="flex justify-between font-poppins backdrop-blur-md fixed top-0 w-screen h-16 border-red-500 ">
+  <div class="flex justify-between mbl:justify-center font-poppins backdrop-blur-md fixed top-0 w-screen h-16 mbl:h-12 mbl:bottom-0 mbl:top-auto">
     <div class="flex items-center font-semibold text-2xl">
-      <h1 class="pl-10">Cyatria Wichaksana Ristanto</h1>
+      <h1 class="pl-10 cursor-pointer mbl:hidden">Cyatria Wichaksana Ristanto</h1>
     </div>
-    <div class="flex justify-end items-center gap-10 pr-24 font-medium">
-      <a class="p-1 hover:text-slate-300" href="./index.html">About</a>
-      <a class="p-1 text-sky-500 hover:text-sky-600 underline underline-offset-8" href="./portofolio.html">Portofolio</a>
-      <a class="p-1 hover:text-slate-300" href="./contact.html">Contact Me</a>
+    <div class="flex items-center gap-10 pr-24 font-medium mbl:p-0 mbl:justify-start">
+      <a class="mbl:text-xs p-1 hover:text-slate-300" href="./index.html">About</a>
+      <a class="mbl:text-xs p-1 text-sky-500 hover:text-sky-600 underline underline-offset-8" href="./portofolio.html">Portofolio</a>
+      <a class="mbl:text-xs p-1 hover:text-slate-300" href="./contact.html">Contact Me</a> 
     </div>
   </div>
-  <div class="w-4/12"></div>
+  <div class="w-4/12 mbl:hidden"></div>
   <!-- main -->
-  <div class="container flex flex-col w-7/12 h-auto top-10 pt-24">
+  <div class="container flex flex-col w-7/12 h-auto top-10 pt-24 mbl:w-full mbl:p-6">
     <div class="flex flex-col ">
-      <h1 class=" text-4xl font-semibold py-3 border-b-2">Portofolio</h1>
-      <div class="flex flex-wrap py-10 ">
-          <a class="flex flex-col p-7 w-1/2 items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/eggvision-react" target="_blank">
+      <h1 class="mbl:text-2xl mbl:py-1 text-4xl font-semibold py-3 border-b-2">Portofolio</h1>
+      <div class="flex flex-wrap py-10 mbl:flex-col">
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/eggvision-react" target="_blank">
             <div class="w-48">
               <img src="./img/react.png" class="w-48" alt="">
             </div>
             <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Egg Vision</h1>
             <p class="text-white pt-4">Website for size of the egg and the condition of the egg. Using Python for back end and using ReactJS and Tailwind for front end.</p>
           </a>
-          <a class="flex flex-col p-7 w-1/2 items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500 justify-center" href="https://github.com/adit-wr/uBook" target="_blank">
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500 justify-center" href="https://github.com/adit-wr/uBook" target="_blank">
             <div class="h-44">
               <img src="./img/php.png" class="h-44" alt="">
             </div>
             <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">uBook</h1>
             <p class="text-white pt-4">E-commerce website that sells books with 3 actors admin, librarian, customer. Using PHP and MySQL.</p>
           </a>
-          <a class="flex flex-col p-7 w-1/2 items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/admin-gudang-tkinter" target="_blank">
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/admin-gudang-tkinter" target="_blank">
             <div class="w-48">
               <img src="./img/python.png" class="w-48" alt="">
             </div>
             <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Admin Gudang</h1>
             <p class="text-white pt-4">Dekstop application using Python and library Tkinter.</p>
           </a>
-          <a class="flex flex-col p-7 w-1/2 items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/ludo-game" target="_blank">
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/ludo-game" target="_blank">
             <div class="w-48">
               <img src="./img/python.png" class="w-48" alt="">
             </div>
             <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Ludo</h1>
             <p class="text-white pt-4">Dekstop game application using Python and library OpenGL. This application for playing Ludo Game</p>
           </a>
-          <a class="flex flex-col p-7 w-1/2 items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/pencatatan-tkinter" target="_blank">
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 hover:bg-blue-950  hover:text-white hover:scale-110 ease-in-out duration-500" href="https://github.com/adit-wr/pencatatan-tkinter" target="_blank">
             <div class="w-48">
               <img src="./img/python.png" class="w-48" alt="">
             </div>
@@ -67,7 +67,7 @@
     </div>  
   </div>
   <!-- sidebar -->
-  <div class="container flex flex-col items-center mt-24 w-3/12 rounded-xl border-2 border-blue-600 p-10 fixed left-14">
+  <div class="mbl:hidden container flex flex-col items-center mt-24 w-3/12 rounded-xl border-2 border-blue-600 p-10 fixed left-14">
     <img src="./img/adit.jpg" alt="" class="w-40 h-40 rounded-full cursor-pointer hover:scale-150 ease-in-out duration-500">
     <h1 class="text-xl text-center pt-5 px-1 w-auto border-b-2">Cyatria Wichaksana Ristanto</h1>
     <div class="flex flex-col gap-3 justify-center w-11/12 pt-5">
