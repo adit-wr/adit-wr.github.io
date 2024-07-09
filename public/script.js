@@ -1,50 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const elementsLeft = document.querySelectorAll('.fade-in-left');
-    const elementsRight = document.querySelectorAll('.fade-in-right');
-    const elementsTop = document.querySelectorAll('.fade-in-top');
-    const elementsBot = document.querySelectorAll('.fade-in-bot');
-    const elementsFade = document.querySelectorAll('.fade');
+document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.1
+    };
 
-    function checkFade() {
-        elementsLeft.forEach(element => {
-            if (isElementInViewport(element)) {
-                element.classList.add('active');
-            }
-        });
-        elementsRight.forEach(element => {
-            if (isElementInViewport(element)) {
-                element.classList.add('active');
-            }
-        });
-        elementsTop.forEach(element => {
-            if (isElementInViewport(element)) {
-                element.classList.add('active');
-            }
-        });
-        elementsBot.forEach(element => {
-            if (isElementInViewport(element)) {
-                element.classList.add('active');
-            }
-        });
-        elementsFade.forEach(element => {
-            if (isElementInViewport(element)) {
-                element.classList.add('active');
-            }
-        });
-    }
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active');
+        }
+      });
+    };
 
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    checkFade();
-
-    window.addEventListener('scroll', checkFade);
-    window.addEventListener('resize', checkFade);
-});
+    document.querySelectorAll('.fade-in-left, .fade-in-right, .fade-in-top, .fade-in-bot, .fade').forEach(el => {
+      observer.observe(el);
+    });
+  });
