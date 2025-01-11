@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/src/output.css">
+  <link rel="icon" href="./img/adit.jpg">
+  <title>Cyatria | Portofolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  </style>
+</head>
+<body class="bg-gray-950 flex w-full h-full text-white mbl:flex-col mbl:items-center">
+  <!-- navbar -->
+  <div class="flex justify-between mbl:justify-center font-poppins backdrop-blur-md fixed z-50 top-0 w-screen h-16 mbl:h-12 mbl:bottom-0 mbl:top-auto">
+    <div class="flex items-center font-semibold text-2xl">
+      <h1 class="pl-10 cursor-pointer mbl:hidden">Cyatria Wichaksana Ristanto</h1>
+    </div>
+    <div class="flex items-center gap-10 pr-24 font-medium mbl:p-0 mbl:justify-start">
+      <a class="mbl:text-xs p-1 ltp:hover:text-slate-300" href="./index.html">About</a>
+      <a class="mbl:text-xs p-1 text-sky-500 ltp:hover:text-sky-600 underline underline-offset-8" href="./portofolio.html">Portofolio</a>
+      <a class="mbl:text-xs p-1 ltp:hover:text-slate-300" href="./contact.html">Contact Me</a> 
+    </div>
+  </div>
+  <div class="w-4/12 mbl:hidden"></div>
+  <!-- sidebar -->
+  <div class="container flex flex-col items-center mt-24 w-3/12 rounded-xl border-2 border-blue-600 p-10 fixed left-14 mbl:static mbl:w-11/12 mbl:m-5 mbl:p-5 mbl:left-0">
+    <div class="flex flex-col items-center mbl:flex-row mbl:gap-5">
+      <img src="./img/adit.jpg" alt="" class="w-40 h-40 mbl:w-20 mbl:h-20 rounded-full cursor-pointer ltp:hover:scale-150 ltp:ease-in-out ltp:duration-500">
+      <h1 class="text-xl text-center pt-5 px-1 w-auto border-b-2 mbl:pt-0">Cyatria Wichaksana Ristanto</h1>
+    </div>
+    <div class="flex flex-col gap-3 justify-center w-11/12 pt-5 mbl:flex-row mbl:pt-8">
+      <a class="flex mbl:flex-col mbl:items-center gap-2 p-2 rounded-xl ltp:hover:bg-blue-950 ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://www.github.com/adit-wr/" target="_blank">
+        <img class="w-12 h-12 mbl:w-8 mbl:h-8" src="./img/github.svg" alt="">
+        <div class="flex flex-col text-left mbl:items-center">
+          <p class="mbl:hidden">Github</p>
+          <p class="text-xs mbl:hidden">adit-wr</p>
+        </div>
+      </a>
+      <a class="flex mbl:flex-col mbl:items-center gap-2 p-2 rounded-xl ltp:hover:bg-blue-950 ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://www.linkedin.com/in/cyatriawr/" target="_blank">
+        <img class="w-12 h-12 mbl:w-8 mbl:h-8" src="./img/linkedin.svg" alt="">
+        <div class="flex flex-col text-left mbl:items-center">
+          <p class="mbl:hidden">LinkedIn</p>
+          <p  class="text-xs mbl:hidden">cyatriawr</p>
+        </div>
+      </a>
+      <a class="flex mbl:flex-col mbl:items-center gap-2 p-2 rounded-xl ltp:hover:bg-blue-950 ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://www.instagram.com/adit.w.r/" target="_blank">
+        <img class="w-12 h-12 mbl:w-8 mbl:h-8" src="./img/instagram.svg" alt="">
+        <div class="flex flex-col text-left mbl:items-center">
+          <p class="mbl:hidden">Instagram</p>
+          <p class="text-xs mbl:hidden">adit.w.r</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <!-- main -->
+  <div class="container flex flex-col w-7/12 h-auto top-10 pt-24 mbl:w-full mbl:p-6">
+    <div class="flex flex-col ">
+      <h1 class="mbl:text-2xl mbl:py-1 text-4xl font-semibold py-3 border-b-2">Portofolio</h1>
+      <div class="flex flex-wrap py-10 mbl:flex-col">
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 ltp:hover:bg-blue-950  ltp:hover:text-white ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500 " href="https://github.com/adit-wr/eggvision-react" target="_blank">
+            <div class="w-48">
+              <img src="./img/react.png" class="w-48" alt="">
+            </div>
+            <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Egg Vision</h1>
+            <p class="text-white pt-4">Website for size of the egg and the condition of the egg. Using Python for back end and using ReactJS and Tailwind for front end.</p>
+          </a>
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 ltp:hover:bg-blue-950  ltp:hover:text-white ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500 justify-center" href="https://github.com/adit-wr/uBook" target="_blank">
+            <div class="h-44">
+              <img src="./img/php.png" class="h-44" alt="">
+            </div>
+            <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">uBook</h1>
+            <p class="text-white pt-4">E-commerce website that sells books with 3 actors admin, librarian, customer. Using PHP and MySQL.</p>
+          </a>
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 ltp:hover:bg-blue-950  ltp:hover:text-white ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://github.com/adit-wr/admin-gudang-tkinter" target="_blank">
+            <div class="w-48">
+              <img src="./img/python.png" class="w-48" alt="">
+            </div>
+            <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Admin Gudang</h1>
+            <p class="text-white pt-4">Dekstop application using Python and library Tkinter.</p>
+          </a>
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 ltp:hover:bg-blue-950  ltp:hover:text-white ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://github.com/adit-wr/ludo-game" target="_blank">
+            <div class="w-48">
+              <img src="./img/python.png" class="w-48" alt="">
+            </div>
+            <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Ludo</h1>
+            <p class="text-white pt-4">Dekstop game application using Python and library OpenGL. This application for playing Ludo Game</p>
+          </a>
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full items-center rounded-xl text-sky-500 ltp:hover:bg-blue-950  ltp:hover:text-white ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://github.com/adit-wr/pencatatan-tkinter" target="_blank">
+            <div class="w-48">
+              <img src="./img/python.png" class="w-48" alt="">
+            </div>
+            <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Pencacatan Hasil Panen</h1>
+            <p class="text-white pt-4">Dekstop application using Python and library Tkinter.</p>
+          </a>
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full  items-center rounded-xl text-sky-500 ltp:hover:bg-blue-950  ltp:hover:text-white ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://drive.google.com/file/d/1G1FfigfS2cQgGDog3u0aIJnuAo0Jks6P/view?usp=sharing" target="_blank">
+            <div class="w-64">
+              <img src="./img/sertif_stechoq.png" class="w-64" alt="">
+            </div>
+            <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">Kampus Merdeka Batch 7</h1>
+            <p class="text-white pt-4">Certificate of Achievement Backend Developer for Material Supply Warehouse Management System.</p>
+          </a>
+          <a class="flex flex-col p-7 w-1/2 mbl:w-full  items-center rounded-xl text-sky-500 ltp:hover:bg-blue-950  ltp:hover:text-white ltp:hover:scale-110 ltp:ease-in-out ltp:duration-500" href="https://github.com/adit-wr/technominds-frontend-new" target="_blank">
+            <div class="w-48">
+              <img src="./img/vue.png" class="w-48" alt="">
+            </div>
+            <h1 class="pt-5 text-3xl font-bold text-center w-full border-b-2">TechnoMinds</h1>
+            <p class="text-white pt-4">Material Supply Warehouse Management System.</p>
+          </a>
+      </div>
+    </div>  
+  </div>
+</body>
+</html>
