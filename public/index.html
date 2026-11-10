@@ -1,128 +1,498 @@
 <!doctype html>
-<html>
+<html lang="en" class="overflow-x-hidden">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyatria Wichaksana Ristanto — Web &amp; Mobile Developer</title>
+  <meta name="description" content="Cyatria Wichaksana Ristanto — Fresh graduate in Informatics (S1), Mobile Developer (Flutter, React Native) &amp; Full Stack Web Developer (Vue, React, Node.js, Laravel) based in Surakarta, Indonesia.">
+  <meta name="keywords" content="Cyatria Wichaksana Ristanto, Adit Wichaksana, Cyatria, Wichaksana, Mobile Developer Surakarta, Flutter Developer Indonesia, React Native Developer, Full Stack Developer Solo, S1 Informatika UNEJ, PT Tiga Serangkai Inti Corpora, MagangHub Batch 2, Portfolio, Frontend Developer, Web Developer">
+  <meta name="author" content="Cyatria Wichaksana Ristanto">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://adit-wr.github.io/">
+
+  <!-- Structured Data JSON-LD for Google Rich Results & Knowledge Graph -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Cyatria Wichaksana Ristanto",
+    "alternateName": ["Adit Wichaksana", "Cyatria", "C. Wichaksana Ristanto"],
+    "jobTitle": "Mobile & Web Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "PT Tiga Serangkai Inti Corpora"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Jember"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Surakarta",
+      "addressRegion": "Central Java",
+      "addressCountry": "ID"
+    },
+    "url": "https://adit-wr.github.io/",
+    "sameAs": [
+      "https://github.com/adit-wr",
+      "https://www.linkedin.com/in/cyatriawr/",
+      "https://www.instagram.com/adit.w.r/"
+    ]
+  }
+  </script>
+
+  <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://adit-wr.github.io/">
+  <meta property="og:title" content="Cyatria Wichaksana Ristanto — Web &amp; Mobile Developer">
+  <meta property="og:description" content="Mobile Developer (Flutter, React Native) &amp; Full Stack Web Developer. Fresh graduate in Informatics from University of Jember, currently interning at PT Tiga Serangkai Inti Corpora.">
+  <meta property="og:image" content="./img/adit.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cyatria Wichaksana Ristanto — Web &amp; Mobile Developer">
+  <meta name="twitter:description" content="Mobile Developer (Flutter, React Native) &amp; Full Stack Web Developer based in Surakarta, Indonesia.">
+  <meta name="twitter:image" content="./img/adit.jpg">
+
   <link rel="stylesheet" href="./output.css">
   <link rel="icon" href="./img/adit.jpg">
-  <title>Cyatria | About</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-  </style>
-  <script src="./script.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <script src="./script.js" defer></script>
 </head>
-<body class="bg-slate-950 flex w-full h-full text-white mbl:flex-col mbl:items-center">
-  <!-- navbar -->
-  <div class="flex justify-between mbl:justify-center font-poppins backdrop-blur-md fixed z-50 top-0 w-screen h-16 mbl:h-12 mbl:bottom-0 mbl:top-auto">
-    <div class="flex items-center font-semibold text-2xl">
-      <h1 class="pl-10 cursor-pointer mbl:hidden">Cyatria Wichaksana Ristanto</h1>
-    </div>
-    <div class="flex items-center gap-10 pr-24 font-medium mbl:p-0 mbl:justify-start">
-      <a class="mbl:text-xs p-1 text-sky-500 ltp:hover:text-sky-600 underline underline-offset-8" href="./index.html">About</a>
-      <a class="mbl:text-xs p-1 ltp:hover:text-slate-300" href="./portofolio.html">Portofolio</a>
-      <a class="mbl:text-xs p-1 ltp:hover:text-slate-300" href="./contact.html">Contact Me</a> 
-    </div>
-  </div>
-  <div class="w-4/12 mbl:hidden"></div>
-  <!-- sidebar -->
-  <div class="container flex flex-col items-center mt-24 w-3/12 rounded-xl border-2 border-blue-600 p-10 fixed left-14 mbl:static mbl:w-11/12 mbl:m-5 mbl:p-5 mbl:left-0">
-    <div class="flex flex-col items-center mbl:flex-row mbl:gap-5">
-      <img src="./img/adit.jpg" alt="" class="w-40 h-40 mbl:w-20 mbl:h-20 rounded-full cursor-pointer ltp:hover:scale-150 ease-in-out duration-500">
-      <h1 class="text-xl text-center pt-5 px-1 w-auto border-b-2 mbl:pt-0">Cyatria Wichaksana Ristanto</h1>
-    </div>
-    <div class="flex flex-col gap-3 justify-center w-11/12 pt-5 mbl:flex-row mbl:pt-8">
-      <a class="flex mbl:flex-col mbl:items-center gap-2 p-2 rounded-xl ltp:hover:bg-blue-950 ltp:hover:scale-110 ease-in-out duration-500" href="https://www.github.com/adit-wr/" target="_blank">
-        <img class="w-12 h-12 mbl:w-8 mbl:h-8" src="./img/github.svg" alt="">
-        <div class="flex flex-col text-left mbl:items-center">
-          <p class="mbl:hidden">Github</p>
-          <p class="text-xs mbl:hidden">adit-wr</p>
-        </div>
+<body class="bg-bg text-fg overflow-x-hidden w-full max-w-full">
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="sticky top-0 z-50 border-b bg-bg/95 backdrop-blur w-full">
+    <div class="flex h-14 items-stretch justify-between mbl:h-12 w-full">
+      <a href="./index.html" class="flex flex-1 items-center gap-2.5 whitespace-nowrap border-r px-4 text-[12px] font-black uppercase tracking-[0.08em] transition-colors duration-200 hover:bg-fg hover:text-bg truncate mbl:text-[11px] mbl:px-3">
+        <span class="h-2.5 w-2.5 shrink-0 bg-accent"></span>
+        <span class="truncate">C. Wichaksana Ristanto</span>
       </a>
-      <a class="flex mbl:flex-col mbl:items-center gap-2 p-2 rounded-xl ltp:hover:bg-blue-950 ltp:hover:scale-110 ease-in-out duration-500" href="https://www.linkedin.com/in/cyatriawr/" target="_blank">
-        <img class="w-12 h-12 mbl:w-8 mbl:h-8" src="./img/linkedin.svg" alt="">
-        <div class="flex flex-col text-left mbl:items-center">
-          <p class="mbl:hidden">LinkedIn</p>
-          <p  class="text-xs mbl:hidden">cyatriawr</p>
+
+      <!-- Live Local Time Clock -->
+      <div class="flex items-center gap-2 border-r px-5 text-xs mbl:hidden">
+        <span class="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-accent"></span>
+        <span class="live-clock flex items-baseline gap-1.5"><span class="font-light tracking-wide text-muted">Surakarta</span> <span class="font-mono font-bold text-accent">--:--:--</span> <span class="font-normal text-muted">WIB</span></span>
+      </div>
+
+      <nav class="flex items-stretch mbl:hidden" aria-label="Primary">
+        <a class="nav-link" href="./index.html" aria-current="page"><span class="text-[10px] font-medium opacity-60">01</span>About</a>
+        <a class="nav-link" href="./contact.html"><span class="text-[10px] font-medium opacity-60">02</span>Contact</a>
+        <a class="nav-link border-l text-accent whitespace-nowrap" href="https://drive.google.com/uc?export=download&id=1maeC8igUXJPLxQ0cMyj50gHwSnZQVNOb" target="_blank" rel="noopener">
+          <span class="text-[10px] font-medium opacity-60">03</span>Resume <span aria-hidden="true" class="inline-block">↗</span>
+        </a>
+      </nav>
+
+      <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" class="nav-link shrink-0 border-l mbl:!px-3">
+        <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-4 w-4" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="hidden h-4 w-4" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/>
+        </svg>
+        <span id="theme-label" class="mbl:hidden">Dark</span>
+      </button>
+    </div>
+
+    <!-- Mobile Secondary Header Nav (Dedicated 3-column equal grid) -->
+    <nav class="grid grid-cols-3 h-11 items-stretch border-t ltp:hidden w-full bg-bg" aria-label="Primary mobile">
+      <a class="flex items-center justify-center border-r text-[11px] font-semibold uppercase tracking-wider transition-colors duration-200 hover:bg-fg hover:text-bg text-accent relative after:content-[''] after:absolute after:inset-x-0 after:bottom-0 after:h-[2.5px] after:bg-accent" href="./index.html" aria-current="page">01 About</a>
+      <a class="flex items-center justify-center border-r text-[11px] font-semibold uppercase tracking-wider transition-colors duration-200 hover:bg-fg hover:text-bg text-fg/80" href="./contact.html">02 Contact</a>
+      <a class="flex items-center justify-center text-[11px] font-bold uppercase tracking-wider text-accent transition-colors duration-200 hover:bg-fg hover:text-bg whitespace-nowrap" href="https://drive.google.com/uc?export=download&id=1maeC8igUXJPLxQ0cMyj50gHwSnZQVNOb" target="_blank" rel="noopener">03 Resume&nbsp;↗</a>
+    </nav>
+  </header>
+
+  <!-- ============================ MAIN CONTENT (SINGLE COLUMN) ============================ -->
+  <main class="max-w-[1400px] mx-auto border-x mbl:border-x-0">
+
+    <!-- HERO / INTRODUCTION -->
+    <section class="border-b px-10 py-16 mbl:px-5 mbl:py-10">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <p class="label">01 — Introduction</p>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span class="label text-muted">Surakarta, Central Java</span>
+          <p class="label flex items-center gap-2 text-accent">
+            <span class="h-2 w-2 shrink-0 animate-pulse bg-accent"></span>
+            Open to work
+          </p>
         </div>
-      </a>
-      <a class="flex mbl:flex-col mbl:items-center gap-2 p-2 rounded-xl ltp:hover:bg-blue-950 ltp:hover:scale-110 ease-in-out duration-500" href="https://www.instagram.com/adit.w.r/" target="_blank">
-        <img class="w-12 h-12 mbl:w-8 mbl:h-8" src="./img/instagram.svg" alt="">
-        <div class="flex flex-col text-left mbl:items-center">
-          <p class="mbl:hidden">Instagram</p>
-          <p class="text-xs mbl:hidden">adit.w.r</p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-12 gap-8 items-end mbl:mt-8 mbl:grid-cols-1">
+        <div class="col-span-8 mbl:col-span-1">
+          <span class="label text-accent">Curriculum Vitae</span>
+          <h1 class="display mt-4 text-[clamp(2.2rem,7vw,6.5rem)]">
+            <span class="reveal-mask"><span class="block">Cyatria</span></span>
+            <span class="reveal-mask delay-1"><span class="block">Wichaksana</span></span>
+            <span class="reveal-mask delay-2"><span class="block">Ristanto<span class="text-accent">.</span></span></span>
+          </h1>
         </div>
-      </a>
+        <div class="col-span-4 flex flex-col justify-end border-l pl-8 mbl:col-span-1 mbl:border-l-0 mbl:border-t mbl:pl-0 mbl:pt-6 fade delay-2">
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-accent">Role</p>
+          <p class="mt-1 text-2xl font-black uppercase tracking-[-0.03em]">Web &amp; Mobile Developer</p>
+          <p class="mt-3 text-sm text-muted">Fresh Graduate — Bachelor Degree in Informatics, University of Jember</p>
+        </div>
+      </div>
+
+      <!-- Quick Facts Bar -->
+      <div class="mt-14 grid grid-cols-4 border-t pt-8 mbl:mt-8 mbl:grid-cols-1 mbl:gap-6 fade delay-3">
+        <div class="border-r pr-8 mbl:border-r-0 mbl:border-b mbl:pb-4 mbl:pr-0">
+          <dt class="label">Based</dt>
+          <dd class="mt-2 text-base font-bold">Surakarta, Central Java</dd>
+          <p class="mt-1 text-xs text-muted">Indonesia — GMT+7</p>
+        </div>
+        <div class="border-r px-8 mbl:border-r-0 mbl:border-b mbl:px-0 mbl:pb-4">
+          <dt class="label">Education</dt>
+          <dd class="mt-2 text-base font-bold">Bachelor Degree in Informatics</dd>
+          <p class="mt-1 text-xs text-muted">University of Jember (UNEJ)</p>
+        </div>
+        <div class="border-r px-8 mbl:border-r-0 mbl:border-b mbl:px-0 mbl:pb-4">
+          <dt class="label">Direct Inquiries</dt>
+          <dd class="mt-2 text-base font-bold break-words">
+            <a href="mailto:aditwichaksana@gmail.com" class="transition-colors hover:text-accent">aditwichaksana@gmail.com</a>
+          </dd>
+          <p class="mt-1 text-xs text-muted">Response within 24 hours</p>
+        </div>
+        <div class="pl-8 mbl:pl-0 flex flex-col justify-between">
+          <div>
+            <dt class="label text-accent">Curriculum Vitae</dt>
+            <dd class="mt-2 text-base font-bold">CV &amp; Portfolio PDF</dd>
+          </div>
+          <a href="https://drive.google.com/uc?export=download&id=1maeC8igUXJPLxQ0cMyj50gHwSnZQVNOb"
+             target="_blank" rel="noopener"
+             class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-accent transition-colors hover:text-fg">
+            Download Resume <span aria-hidden="true" class="text-sm">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bio Statement -->
+      <div class="mt-10 border-t pt-8">
+        <p class="max-w-[85ch] text-[16px] leading-[1.8] text-fg/80 fade">
+          Fresh graduate with a Bachelor's Degree in Informatics from the University of Jember, focusing on Web &amp; Mobile Development. Currently serving as a <strong>Mobile Developer intern (MagangHub Batch 2) at PT Tiga Serangkai Inti Corpora</strong>, developing mobile applications with Flutter. Experienced in cross-platform mobile engineering (<strong>Flutter</strong>, <strong>React Native</strong>) and modern full stack web development with <strong>Vue</strong>, <strong>React</strong>, <strong>Node.js</strong>, and <strong>Laravel</strong>.
+        </p>
+      </div>
+
+      <!-- Social / Online Channels (Full-Width Swiss Grid) -->
+      <div class="mt-10 border-t pt-8">
+        <div class="flex items-baseline justify-between mb-4">
+          <p class="label text-accent">Online Channels</p>
+          <span class="label text-muted">03 Profiles</span>
+        </div>
+        <div class="grid grid-cols-3 border-t border-l mbl:grid-cols-1">
+          <a class="group flex items-center justify-between border-r border-b p-6 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:p-5 fade delay-1"
+             href="https://www.github.com/adit-wr/" target="_blank" rel="noopener">
+            <div class="flex flex-col gap-1">
+              <span class="label text-accent group-hover:text-bg/70">01 / Code</span>
+              <span class="text-xl font-black uppercase tracking-tight group-hover:text-bg">GitHub</span>
+              <span class="text-xs text-accent/80 group-hover:text-bg/70">github.com/adit-wr</span>
+            </div>
+            <span class="text-2xl text-accent transition-transform duration-200 group-hover:text-bg group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="group flex items-center justify-between border-r border-b p-6 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:p-5 fade delay-2"
+             href="https://www.linkedin.com/in/cyatriawr/" target="_blank" rel="noopener">
+            <div class="flex flex-col gap-1">
+              <span class="label text-accent group-hover:text-bg/70">02 / Network</span>
+              <span class="text-xl font-black uppercase tracking-tight group-hover:text-bg">LinkedIn</span>
+              <span class="text-xs text-accent/80 group-hover:text-bg/70">linkedin.com/in/cyatriawr</span>
+            </div>
+            <span class="text-2xl text-accent transition-transform duration-200 group-hover:text-bg group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="group flex items-center justify-between border-r border-b p-6 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:p-5 fade delay-3"
+             href="https://www.instagram.com/adit.w.r/" target="_blank" rel="noopener">
+            <div class="flex flex-col gap-1">
+              <span class="label text-accent group-hover:text-bg/70">03 / Social</span>
+              <span class="text-xl font-black uppercase tracking-tight group-hover:text-bg">Instagram</span>
+              <span class="text-xs text-accent/80 group-hover:text-bg/70">instagram.com/adit.w.r</span>
+            </div>
+            <span class="text-2xl text-accent transition-transform duration-200 group-hover:text-bg group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 / EXPERIENCE -->
+    <section class="border-b">
+      <header class="flex items-baseline gap-4 border-b px-10 py-5 mbl:px-5">
+        <span class="label text-accent">02</span>
+        <h2 class="text-xl font-bold uppercase tracking-tight">Experience</h2>
+        <span class="label ml-auto">03 Roles — 2024 / 2026</span>
+      </header>
+
+      <article class="grid grid-cols-12 items-baseline gap-6 border-b px-10 py-8 transition-colors duration-200 hover:bg-surface mbl:grid-cols-1 mbl:gap-3 mbl:px-5 mbl:py-6 fade delay-1">
+        <div class="col-span-3 mbl:col-span-1">
+          <span class="label text-accent">Sep 2026 — Present</span>
+          <p class="text-xs text-muted mt-1">MagangHub Batch 2 2026</p>
+        </div>
+        <div class="col-span-6 mbl:col-span-1">
+          <h3 class="text-2xl font-black uppercase tracking-[-0.02em] mbl:text-xl">Mobile Developer</h3>
+          <p class="mt-1.5 text-base font-semibold text-accent">PT Tiga Serangkai Inti Corpora</p>
+          <p class="mt-2 text-sm text-muted">Developing internal and external publishing mobile applications using the Flutter framework.</p>
+        </div>
+        <div class="col-span-3 text-right mbl:col-span-1 mbl:text-left">
+          <span class="label border border-accent/40 bg-accent/10 text-accent px-3 py-1.5 font-bold">Flutter</span>
+        </div>
+      </article>
+
+      <article class="grid grid-cols-12 items-baseline gap-6 border-b px-10 py-8 transition-colors duration-200 hover:bg-surface mbl:grid-cols-1 mbl:gap-3 mbl:px-5 mbl:py-6 fade delay-2">
+        <div class="col-span-3 mbl:col-span-1">
+          <span class="label text-accent">Feb — Jun 2025</span>
+          <p class="text-xs text-muted mt-1">Kampus Merdeka — Magang MBKM</p>
+        </div>
+        <div class="col-span-6 mbl:col-span-1">
+          <h3 class="text-2xl font-black uppercase tracking-[-0.02em] mbl:text-xl">Mobile &amp; Backend Developer</h3>
+          <p class="mt-1.5 text-base font-semibold text-accent">Department of Communication and Information Technology (Diskominfo) Mojokerto Regency</p>
+          <p class="mt-2 text-sm text-muted">Built the public healthcare mobile app "Mojokerto Sehat" (for patients and medical staff) with React Native and Node.js REST APIs.</p>
+        </div>
+        <div class="col-span-3 text-right mbl:col-span-1 mbl:text-left">
+          <span class="label border border-accent/40 bg-accent/10 text-accent px-3 py-1.5 font-bold">React Native · Node.js</span>
+        </div>
+      </article>
+
+      <article class="grid grid-cols-12 items-baseline gap-6 px-10 py-8 transition-colors duration-200 hover:bg-surface mbl:grid-cols-1 mbl:gap-3 mbl:px-5 mbl:py-6 fade delay-3">
+        <div class="col-span-3 mbl:col-span-1">
+          <span class="label text-accent">Aug — Dec 2024</span>
+          <p class="text-xs text-muted mt-1">Kampus Merdeka — MSIB Batch 7</p>
+        </div>
+        <div class="col-span-6 mbl:col-span-1">
+          <h3 class="text-2xl font-black uppercase tracking-[-0.02em] mbl:text-xl">Full Stack Web Developer</h3>
+          <p class="mt-1.5 text-base font-semibold text-accent">PT Stechoq Robotika Indonesia</p>
+          <p class="mt-2 text-sm text-muted">Developed the TechnoMinds Material Supply Warehouse Management System using Vue.js and Node.js.</p>
+        </div>
+        <div class="col-span-3 text-right mbl:col-span-1 mbl:text-left">
+          <span class="label border border-accent/40 bg-accent/10 text-accent px-3 py-1.5 font-bold">Vue · Node.js</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- 03 / EXPERTISE -->
+    <section class="border-b">
+      <header class="flex items-baseline gap-4 border-b px-10 py-5 mbl:px-5">
+        <span class="label text-accent">03</span>
+        <h2 class="text-xl font-bold uppercase tracking-tight">Expertise</h2>
+        <span class="label ml-auto">Core Competencies</span>
+      </header>
+
+      <div class="grid grid-cols-2 mbl:grid-cols-1">
+        <article class="group grid-cell p-10 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:p-6 fade delay-1">
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="label text-accent group-hover:text-bg/70">01</span>
+            <span class="label group-hover:text-bg/70">Android + iOS</span>
+          </div>
+          <h3 class="mt-8 text-3xl font-black uppercase leading-none tracking-[-0.03em] mbl:text-2xl">Mobile Developer</h3>
+          <p class="mt-4 text-sm leading-relaxed text-fg/75 group-hover:text-bg/70">
+            Focused on cross-platform mobile development using Flutter and React Native. Experienced in REST API integration, state management, and modular architecture.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="border border-accent/40 bg-accent/5 text-accent px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30 group-hover:text-bg">Flutter</span>
+            <span class="border border-accent/40 bg-accent/5 text-accent px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30 group-hover:text-bg">React Native</span>
+            <span class="border px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30">Dart</span>
+            <span class="border px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30">TypeScript</span>
+          </div>
+        </article>
+
+        <article class="group grid-cell p-10 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:p-6 fade delay-2">
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="label text-accent group-hover:text-bg/70">02</span>
+            <span class="label group-hover:text-bg/70">Frontend + Backend</span>
+          </div>
+          <h3 class="mt-8 text-3xl font-black uppercase leading-none tracking-[-0.03em] mbl:text-2xl">Full Stack Web Developer</h3>
+          <p class="mt-4 text-sm leading-relaxed text-fg/75 group-hover:text-bg/70">
+            End-to-end web system development. Modern frontend applications using Vue, React, and Tailwind, paired with scalable RESTful API backends built on Node.js and Laravel.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="border border-accent/40 bg-accent/5 text-accent px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30 group-hover:text-bg">Vue.js</span>
+            <span class="border border-accent/40 bg-accent/5 text-accent px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30 group-hover:text-bg">React.js</span>
+            <span class="border px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30">Node.js</span>
+            <span class="border px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] group-hover:border-bg/30">Laravel</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 04 / SELECTED WORK -->
+    <section>
+      <header class="flex flex-wrap items-center justify-between gap-4 border-b px-10 py-5 mbl:px-5">
+        <div class="flex items-baseline gap-4">
+          <span class="label text-accent">04</span>
+          <h2 class="text-xl font-bold uppercase tracking-tight">Selected Work</h2>
+        </div>
+        
+        <!-- Swiss Category Filter Tabs -->
+        <div class="flex items-stretch border divide-x text-xs font-bold uppercase tracking-wider" role="tablist" aria-label="Filter Projects">
+          <button type="button" class="project-filter-btn px-4 py-2 transition-colors duration-150 bg-fg text-bg" data-filter="all" role="tab" aria-selected="true">
+            All <span class="font-normal opacity-70">(05)</span>
+          </button>
+          <button type="button" class="project-filter-btn px-4 py-2 transition-colors duration-150 hover:bg-fg/10" data-filter="mobile" role="tab" aria-selected="false">
+            Mobile <span class="font-normal opacity-70">(03)</span>
+          </button>
+          <button type="button" class="project-filter-btn px-4 py-2 transition-colors duration-150 hover:bg-fg/10" data-filter="web" role="tab" aria-selected="false">
+            Web <span class="font-normal opacity-70">(02)</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="flex flex-col border-b divide-y" id="projects-container">
+
+        <a class="project-row group swiss-hover-row flex items-start justify-between gap-8 p-10 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:flex-col mbl:p-6 fade delay-1"
+           data-category="web"
+           href="https://github.com/adit-wr/eggvision-react" target="_blank" rel="noopener">
+          <div class="flex items-start gap-8 mbl:gap-4">
+            <span class="label text-accent group-hover:text-bg/70 shrink-0 mt-1">01</span>
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="text-3xl font-black uppercase tracking-[-0.03em] mbl:text-2xl">Egg Vision</h3>
+                <span class="border px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider group-hover:border-bg/30">React · Tailwind · Python</span>
+                <span class="border border-accent/40 bg-accent/10 text-accent group-hover:border-bg/40 group-hover:bg-bg/10 group-hover:text-bg px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">Web</span>
+              </div>
+              <p class="mt-3 max-w-[70ch] text-sm leading-relaxed text-fg/75 group-hover:text-bg/70">
+                Computer vision web platform for egg grading and condition analysis. YOLOv5 with ReactJS and Tailwind CSS frontend.
+              </p>
+            </div>
+          </div>
+          <span class="label flex items-center gap-2 text-accent group-hover:text-bg/70 shrink-0 self-center transition-transform duration-200 group-hover:translate-x-1.5 mbl:self-start">
+            View project <span aria-hidden="true" class="text-lg">↗</span>
+          </span>
+        </a>
+
+        <a class="project-row group swiss-hover-row flex items-start justify-between gap-8 p-10 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:flex-col mbl:p-6 fade delay-2"
+           data-category="web"
+           href="https://github.com/adit-wr/technominds-frontend-new" target="_blank" rel="noopener">
+          <div class="flex items-start gap-8 mbl:gap-4">
+            <span class="label text-accent group-hover:text-bg/70 shrink-0 mt-1">02</span>
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="text-3xl font-black uppercase tracking-[-0.03em] mbl:text-2xl">TechnoMinds</h3>
+                <span class="border px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider group-hover:border-bg/30">Vue · Node.js</span>
+                <span class="border border-accent/40 bg-accent/10 text-accent group-hover:border-bg/40 group-hover:bg-bg/10 group-hover:text-bg px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">Web</span>
+              </div>
+              <p class="mt-3 max-w-[70ch] text-sm leading-relaxed text-fg/75 group-hover:text-bg/70">
+                Material Supply Warehouse Management System. Industrial warehouse inventory tracking system developed during MSIB at Stechoq.
+              </p>
+            </div>
+          </div>
+          <span class="label flex items-center gap-2 text-accent group-hover:text-bg/70 shrink-0 self-center transition-transform duration-200 group-hover:translate-x-1.5 mbl:self-start">
+            View project <span aria-hidden="true" class="text-lg">↗</span>
+          </span>
+        </a>
+
+        <!-- Confidential (NDA) — intentionally not linked -->
+        <article class="project-row group swiss-hover-row flex items-start justify-between gap-8 p-10 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:flex-col mbl:p-6 fade delay-1"
+                 data-category="mobile">
+          <div class="flex items-start gap-8 mbl:gap-4">
+            <span class="label text-accent group-hover:text-bg/70 shrink-0 mt-1">03</span>
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="text-3xl font-black uppercase tracking-[-0.03em] mbl:text-2xl">Mojokerto Sehat</h3>
+                <span class="border px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider group-hover:border-bg/30">React Native · Node.js</span>
+                <span class="border border-accent/40 bg-accent/10 text-accent group-hover:border-bg/40 group-hover:bg-bg/10 group-hover:text-bg px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">Mobile</span>
+              </div>
+              <p class="mt-3 max-w-[70ch] text-sm leading-relaxed text-fg/75 group-hover:text-bg/70">
+                Public health services mobile application for Mojokerto Regency (serving patients and healthcare workers), built with React Native and Node.js backend.
+              </p>
+            </div>
+          </div>
+          <span class="label flex items-center gap-2 group-hover:text-bg/70 shrink-0 self-center mbl:self-start">
+            <span class="h-2 w-2 shrink-0 bg-accent group-hover:bg-bg/70"></span>
+            Confidential — NDA
+          </span>
+        </article>
+
+        <article class="project-row group swiss-hover-row flex items-start justify-between gap-8 p-10 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:flex-col mbl:p-6 fade delay-2"
+                 data-category="mobile">
+          <div class="flex items-start gap-8 mbl:gap-4">
+            <span class="label text-accent group-hover:text-bg/70 shrink-0 mt-1">04</span>
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="text-3xl font-black uppercase tracking-[-0.03em] mbl:text-2xl">Perpuskita</h3>
+                <span class="border px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider group-hover:border-bg/30">Flutter · Laravel</span>
+                <span class="border border-accent/40 bg-accent/10 text-accent group-hover:border-bg/40 group-hover:bg-bg/10 group-hover:text-bg px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">Mobile</span>
+              </div>
+              <p class="mt-3 max-w-[70ch] text-sm leading-relaxed text-fg/75 group-hover:text-bg/70">
+                Mobile library management application developed with Flutter and Laravel REST API for catalog browsing, borrowing workflow, and membership services.
+              </p>
+            </div>
+          </div>
+          <span class="label flex items-center gap-2 group-hover:text-bg/70 shrink-0 self-center mbl:self-start">
+            <span class="h-2 w-2 shrink-0 bg-accent group-hover:bg-bg/70"></span>
+            Confidential — NDA
+          </span>
+        </article>
+
+        <article class="project-row group swiss-hover-row flex items-start justify-between gap-8 p-10 transition-colors duration-200 hover:bg-fg hover:text-bg mbl:flex-col mbl:p-6 fade delay-3"
+                 data-category="mobile">
+          <div class="flex items-start gap-8 mbl:gap-4">
+            <span class="label text-accent group-hover:text-bg/70 shrink-0 mt-1">05</span>
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="text-3xl font-black uppercase tracking-[-0.03em] mbl:text-2xl">Seller Tools</h3>
+                <span class="border px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider group-hover:border-bg/30">Flutter · Laravel</span>
+                <span class="border border-accent/40 bg-accent/10 text-accent group-hover:border-bg/40 group-hover:bg-bg/10 group-hover:text-bg px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">Mobile</span>
+              </div>
+              <p class="mt-3 max-w-[70ch] text-sm leading-relaxed text-fg/75 group-hover:text-bg/70">
+                Seller productivity mobile application built with Flutter and Laravel for real-time inventory management, order processing, and sales analytics.
+              </p>
+            </div>
+          </div>
+          <span class="label flex items-center gap-2 group-hover:text-bg/70 shrink-0 self-center mbl:self-start">
+            <span class="h-2 w-2 shrink-0 bg-accent group-hover:bg-bg/70"></span>
+            Confidential — NDA
+          </span>
+        </article>
+
+        <!-- Swiss CTA block (Full-width row) -->
+        <a class="group flex items-center justify-between gap-8 bg-accent p-10 text-bg transition-colors duration-200 hover:bg-fg hover:text-bg mbl:flex-col mbl:items-start mbl:p-6 fade delay-1"
+           href="https://github.com/adit-wr/" target="_blank" rel="noopener">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-[0.18em] opacity-80">More Repositories &amp; Experiments</span>
+            <p class="mt-2 text-2xl font-black uppercase tracking-tight">Explore open source projects on GitHub</p>
+          </div>
+          <span class="flex items-center gap-2 text-base font-bold uppercase tracking-wider shrink-0">
+            github.com/adit-wr <span aria-hidden="true" class="text-2xl">↗</span>
+          </span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="border-t">
+    <div class="grid grid-cols-3 mbl:grid-cols-1">
+      <div class="border-r p-5 mbl:border-r-0 mbl:border-b">
+        <p class="label">© 2026 Cyatria Wichaksana Ristanto</p>
+      </div>
+      <div class="border-r p-5 mbl:border-r-0 mbl:border-b">
+        <p class="label">Surakarta, Central Java — GMT+7</p>
+      </div>
+      <div class="flex items-center justify-between gap-3 p-5">
+        <p class="label flex items-center gap-2">
+          <span class="h-2 w-2 bg-accent"></span>
+          Swiss Style — v2.0
+        </p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="label transition-colors hover:text-fg">Top ↑</a>
+        </div>
+      </div>
     </div>
-  </div>
-  <!-- main -->
-  <div class="container flex flex-col w-7/12 h-auto top-10 pt-24 mbl:w-full mbl:px-8 mbl:pt-4 mbl:pb-10">
-    <div class="flex flex-col ">
-      <h1 class="mbl:text-2xl text-4xl font-semibold py-3 fade-in-top">Welcome to my personal website</h1>
-      <p class="mbl:text-sm text-justify fade">Undergraduated Informatics Student at University of Jember, interested in the field of Web Development and Mobile Development. Have a knowledge of programming languages ​​such as PHP, Dart, HTML, CSS, and JavaScript. Have an experience in using FrameWork such as Laravel, CodeIgniter, Flutter, Bootstrap, Tailwind, and ReactJS.</p>
-    </div>
-    <div class="flex justify-between gap-10 px-10 pt-10 mbl:flex-col">
-      <div class="w-1/2 mbl:w-full h-auto rounded-3xl bg-zinc-800 border-2 cursor-pointer border-white ltp:hover:scale-110 ease-in-out duration-500">
-        <h1 class="text-center p-2 pt-5 text-xl font-bold">Web Developer</h1>
-        <p class="px-10 pb-10 text-sm pt-5 text-justify">Front end web development, using HTML, CSS, JavaScript and have a knowledge using framework Tailwind, Bootstrap, and ReactJS. And Back end web development, using PHP, Python,  have a knowledge using framework Laravel and CodeIgniter.</p>
-      </div>
-      <div class="w-1/2 mbl:w-full h-auto rounded-3xl bg-zinc-800 border-2 cursor-pointer border-white ltp:hover:scale-110 ease-in-out duration-500">
-        <h1 class="text-center p-2 pt-5 text-xl font-bold">Mobile Developer</h1>
-        <p class="px-10 pb-10 text-sm pt-5 text-justify">Have a knowledge using Flutter for Android application and iOS application.</p>
-      </div>
-    </div>
-    <div class="flex flex-col justify-between">
-      <div class="flex w-full p-5 justify-center pt-16">
-        <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3 fade">Programming Language</h1>
-      </div>
-      <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/php.png" alt="" class="h-40 mbl:h-16 fade-in-top cursor-pointer">
-        <img src="./img/html.png" alt="" class="h-44 mbl:h-24 fade-in-left cursor-pointer">
-        <img src="./img/css.png" alt="" class="h-44 mbl:h-24 fade-in-right cursor-pointer">
-        <img src="./img/js.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
-        <img src="./img/python.png" alt="" class="h-44 mbl:h-24 fade-in-right cursor-pointer">
-        <img src="./img/csharp.png" alt="" class="h-44 mbl:h-24 fade-in-left cursor-pointer">
-        <img src="./img/dart.png" alt="" class="h-44 mbl:h-24 fade-in-top cursor-pointer">
-        <img src="./img/swift.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
-      </div>
-    </div>
-    <div class="flex flex-col justify-between">
-      <div class="flex w-full p-5 justify-center pt-16">
-        <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3 fade">Frame Work</h1>
-      </div>
-      <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/laravel.png" alt="" class="h-44 mbl:h-24 fade-in-left cursor-pointer">
-        <img src="./img/tailwind.png" alt="" class="h-40 mbl:h-16 fade-in-right cursor-pointer">
-        <img src="./img/bootstrap.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
-        <img src="./img/react.png" alt="" class="h-44 mbl:h-24 fade-in-right cursor-pointer">
-        <img src="./img/flutter.png" alt="" class="h-44 mbl:h-20 fade-in-left cursor-pointer">
-        <img src="./img/codeigniter.png" alt="" class="h-44 mbl:h-24 fade-in-top cursor-pointer">
-        <img src="./img/nodejs.png" alt="" class="h-44 mbl:h-24 fade-in-bot cursor-pointer">
-        <img src="./img/vue.png" alt="" class="h-44 mbl:h-24 fade-in-right cursor-pointer">
-        <img src="./img/express.png" alt="" class="h-44 mbl:h-24 fade-in-left cursor-pointer">
-      </div>
-    </div>
-    <div class="flex flex-col justify-between">
-      <div class="flex w-full p-5 justify-center pt-16">
-        <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3 fade">Database</h1>
-      </div>
-      <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/mysql.png" alt="" class="h-52 mbl:h-24 fade-in-left cursor-pointer">
-        <img src="./img/posgres.png" alt="" class="h-52 mbl:h-24 fade-in-right cursor-pointer">
-        <img src="./img/prisma.png" alt="" class="h-52 mbl:h-24 fade-in-top cursor-pointer">
-      </div>
-    </div>
-    <div class="flex flex-col justify-between">
-      <div class="flex w-full p-5 justify-center pt-16">
-        <h1 class="font-semibold text-start w-full h-10 text-xl border-b-2 px-3 fade">Tools</h1>
-      </div>
-      <div class="flex flex-wrap gap-10 p-10 justify-center">
-        <img src="./img/figma.png" alt="" class="h-52 mbl:h-24 fade-in-left cursor-pointer">
-        <img src="./img/ea.png" alt="" class="h-52 mbl:h-24 fade-in-top cursor-pointer">
-        <img src="./img/trello.png" alt="" class="h-52 mbl:h-24 fade-in-right cursor-pointer">
-        <img src="./img/tinkercad.png" alt="" class="h-52 mbl:h-24 fade-in-left cursor-pointer">
-        <img src="./img/drawio.png" alt="" class="h-52 mbl:h-24 fade-in-bot cursor-pointer">
-      </div>
-    </div>
-  </div>
+  </footer>
+
 </body>
 </html>

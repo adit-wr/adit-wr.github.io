@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adit-wr.github.io/sitemap.xml
