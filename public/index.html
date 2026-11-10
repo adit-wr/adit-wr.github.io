@@ -64,7 +64,7 @@
     (function () {
       try {
         var t = localStorage.getItem('theme');
-        if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (t === 'dark') {
           document.documentElement.classList.add('dark');
         }
       } catch (e) {}
@@ -73,6 +73,22 @@
   <script src="./script.js" defer></script>
 </head>
 <body class="bg-bg text-fg overflow-x-hidden w-full max-w-full">
+
+  <!-- ============================ SPLASH SCREEN ============================ -->
+  <div id="splash" class="splash" role="status" aria-label="Loading">
+    <div class="splash__glow">
+      <div class="splash__arc splash__arc-white"></div>
+      <div class="splash__arc splash__arc-purple splash__arc-animated"></div>
+      <div class="splash__arc splash__arc-blue splash__arc-animated"></div>
+      <div class="splash__arc splash__arc-black splash__arc-animated"></div>
+    </div>
+    <div class="splash__content">
+      <h1 class="splash__title">Cyatria Wichaksana Ristanto</h1>
+    </div>
+  </div>
+  <noscript>
+    <style>.splash{display:none}</style>
+  </noscript>
 
   <!-- ============================ HEADER ============================ -->
   <header class="sticky top-0 z-50 border-b bg-bg/95 backdrop-blur w-full">
