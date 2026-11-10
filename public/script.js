@@ -4,17 +4,10 @@
 (function () {
   const root = document.documentElement;
 
-  // 0. Splash screen — shown only on the first visit
+  // 0. Splash screen — runs on index.html whenever #splash is present
   (function () {
     const splash = document.getElementById("splash");
     if (!splash) return;
-
-    let seen = false;
-    try {
-      seen = localStorage.getItem("splashSeen") === "1";
-    } catch (e) {
-      /* storage unavailable — treat as first visit */
-    }
 
     function hideSplash() {
       splash.classList.add("is-hidden");
@@ -25,22 +18,12 @@
       );
       // Fallback if the transition event never fires
       setTimeout(() => splash.remove(), 1500);
-      try {
-        localStorage.setItem("splashSeen", "1");
-      } catch (e) {
-        /* storage unavailable */
-      }
     }
 
-    if (seen) {
-      // Returning visitor — remove the splash immediately
-      splash.remove();
-    } else {
-      // First visit — let the glow & title animation play, then fade out
-      window.addEventListener("load", () => setTimeout(hideSplash, 2800));
-      // Safety net: never leave the splash stuck on screen
-      setTimeout(hideSplash, 5500);
-    }
+    // Play glow & title animation, then smoothly fade out
+    window.addEventListener("load", () => setTimeout(hideSplash, 2600));
+    // Safety net: never leave the splash stuck on screen
+    setTimeout(hideSplash, 5000);
   })();
 
   const readTheme = () => (root.classList.contains("dark") ? "dark" : "light");

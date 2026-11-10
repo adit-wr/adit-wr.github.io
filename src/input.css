@@ -234,6 +234,17 @@
   isolation: isolate;
   animation: splash-glow-in 2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* On mobile (portrait screens), widen the glow horizon container so the curve is broad and gentle like desktop mode, rather than a steep narrow arch */
+@media (max-width: 768px) {
+  .splash__glow {
+    --ry: -56%;
+    --ay: -48%;
+    width: 300vw;
+    left: -100vw;
+  }
+}
+
 .splash__glow.bottom { --ey: 100%; --ry: 50%; --ay: 40%; }
 .splash__glow.left {
   --ex: 100%; --ey: 0%; --rx: 50%; --ry: 0%;
@@ -275,9 +286,11 @@
   to { translate: 0 0; }
 }
 
+/* Swiss Base Colors: Electric Sky Blue (#38bdf8) & Deep Azure (#0284c7) */
 .splash__arc-white  { --color: #fff;    --size: 1.32; box-shadow: 0 -4px 23px 0 #ffffffb5; }
-.splash__arc-purple { --color: #a558fb; --size: 1.20; --delay: 0.6s; filter: blur(31px); }
-.splash__arc-blue   { --color: #4922e5; --size: 1.24; --delay: 0s;    filter: blur(21px); }
+.splash__arc-purple,
+.splash__arc-cyan   { --color: #38bdf8; --size: 1.20; --delay: 0.6s; filter: blur(31px); }
+.splash__arc-blue   { --color: #0284c7; --size: 1.24; --delay: 0s;    filter: blur(24px); }
 .splash__arc-black  { --color: #000;    --size: 1.20; --delay: 0s;    filter: blur(51px); }
 
 .splash__content {
