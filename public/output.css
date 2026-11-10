@@ -1917,36 +1917,36 @@ h1,
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .hover\:bg-fg {
+  .hover\:bg-fg:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(var(--fg) / var(--tw-bg-opacity, 1));
   }
 
-  .hover\:bg-fg\/10 {
+  .hover\:bg-fg\/10:hover {
     background-color: rgb(var(--fg) / 0.1);
   }
 
-  .hover\:bg-surface {
+  .hover\:bg-surface:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(var(--surface) / var(--tw-bg-opacity, 1));
   }
 
-  .hover\:text-accent {
+  .hover\:text-accent:hover {
     --tw-text-opacity: 1;
     color: rgb(var(--accent) / var(--tw-text-opacity, 1));
   }
 
-  .hover\:text-bg {
+  .hover\:text-bg:hover {
     --tw-text-opacity: 1;
     color: rgb(var(--bg) / var(--tw-text-opacity, 1));
   }
 
-  .hover\:text-fg {
+  .hover\:text-fg:hover {
     --tw-text-opacity: 1;
     color: rgb(var(--fg) / var(--tw-text-opacity, 1));
   }
 
-  .hover\:underline {
+  .hover\:underline:hover {
     text-decoration-line: underline;
   }
 

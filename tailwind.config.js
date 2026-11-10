@@ -31,7 +31,7 @@ module.exports = {
     // Only apply hover styles when the user actually has a pointer that can hover (mouse/touchpad),
     // preventing sticky/inverted "hover" colors when tapping buttons on touch devices (Android/iOS)
     plugin(function ({ addVariant }) {
-      addVariant("hover", "@media (hover: hover) and (pointer: fine)");
+      addVariant("hover", "@media (hover: hover) and (pointer: fine) { &:hover }");
       addVariant("group-hover", "@media (hover: hover) and (pointer: fine) { .group:hover & }");
     }),
   ],
