@@ -1,8 +1,7 @@
 /* ------------------------------------------------------------------
    Swiss Portfolio — Main Script
    - Splash Screen (Initial website open only)
-   - Continuous Background Music (YouTube Player API + Loop)
-   - Seamless Client-Side Navigation (Zero audio interruption)
+   - Seamless Client-Side Navigation (PJAX)
    - Theme Toggle (Light / Dark with circular transition)
    - Live Surakarta WIB Clock
    - Scroll Reveal & Interactive Filters
@@ -127,149 +126,6 @@
   }
 
   // ================================================================
-  // 2. BACKGROUND MUSIC (YouTube Player API — Continuous & Looping)
-  //    Video: https://youtu.be/Tqr0qXxevco
-  // ================================================================
-  const BGM_VIDEO_ID = "Tqr0qXxevco";
-  let bgmPlayer = null;
-  let bgmIsPlaying = false;
-
-  function syncBgmUI(isPlaying) {
-    bgmIsPlaying = isPlaying;
-    const iconOn = document.getElementById("bgm-icon-on");
-    const iconOff = document.getElementById("bgm-icon-off");
-    const label = document.getElementById("bgm-label");
-    const btn = document.getElementById("bgm-toggle");
-
-    if (iconOn) iconOn.classList.toggle("hidden", !isPlaying);
-    if (iconOff) iconOff.classList.toggle("hidden", isPlaying);
-    if (label) {
-      label.textContent = isPlaying ? "BGM" : "MUTED";
-      label.classList.toggle("text-accent", isPlaying);
-      label.classList.toggle("text-muted", !isPlaying);
-    }
-    if (btn) {
-      btn.setAttribute("aria-pressed", String(isPlaying));
-      btn.setAttribute("title", isPlaying ? "Pause background music" : "Play background music");
-    }
-  }
-
-  function initBGM() {
-    // If player already created, just sync UI and attach button listener
-    initBgmButton();
-    if (window._bgmInitialized) return;
-    window._bgmInitialized = true;
-
-    // Load YouTube IFrame API script once
-    if (!window.YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
-    }
-
-    // Called when YouTube IFrame API is loaded
-    window.onYouTubeIframeAPIReady = function () {
-      const host = document.getElementById("yt-bgm-player");
-      if (!host) return;
-
-      const savedTime = parseFloat(sessionStorage.getItem("bgm_time")) || 0;
-      const userMuted = sessionStorage.getItem("bgm_muted") === "1";
-
-      bgmPlayer = new YT.Player("yt-bgm-player", {
-        height: "10",
-        width: "10",
-        videoId: BGM_VIDEO_ID,
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          loop: 1,
-          playlist: BGM_VIDEO_ID, // Required by YouTube for looping
-          playsinline: 1,
-          rel: 0,
-          start: Math.floor(savedTime)
-        },
-        events: {
-          onReady: function (event) {
-            if (savedTime > 0) {
-              try { event.target.seekTo(savedTime, true); } catch (e) {}
-            }
-            if (userMuted) {
-              try { event.target.mute(); } catch (e) {}
-              syncBgmUI(false);
-            } else {
-              try {
-                event.target.unMute();
-                event.target.playVideo();
-              } catch (e) {}
-            }
-
-            // Track playback position every 500ms for state preservation
-            setInterval(() => {
-              if (bgmPlayer && typeof bgmPlayer.getCurrentTime === "function") {
-                try {
-                  const cur = bgmPlayer.getCurrentTime();
-                  if (cur > 0) {
-                    sessionStorage.setItem("bgm_time", String(cur));
-                  }
-                } catch (e) {}
-              }
-            }, 500);
-          },
-          onStateChange: function (event) {
-            // Loop from start if finished
-            if (event.data === YT.PlayerState.ENDED) {
-              try {
-                event.target.seekTo(0);
-                event.target.playVideo();
-              } catch (e) {}
-            }
-            if (event.data === YT.PlayerState.PLAYING) {
-              syncBgmUI(true);
-            } else if (event.data === YT.PlayerState.PAUSED) {
-              syncBgmUI(false);
-            }
-          }
-        }
-      });
-    };
-
-    // Autoplay policy unlocked on first user interaction
-    const unlockAutoplay = () => {
-      if (sessionStorage.getItem("bgm_muted") !== "1" && bgmPlayer && typeof bgmPlayer.playVideo === "function") {
-        try {
-          bgmPlayer.unMute();
-          bgmPlayer.playVideo();
-        } catch (e) {}
-      }
-    };
-    ["click", "touchstart", "keydown"].forEach((evt) => {
-      window.addEventListener(evt, unlockAutoplay, { once: true, passive: true });
-    });
-  }
-
-  function initBgmButton() {
-    const btn = document.getElementById("bgm-toggle");
-    if (!btn || btn._hasListener) return;
-    btn._hasListener = true;
-
-    btn.addEventListener("click", () => {
-      if (!bgmPlayer || typeof bgmPlayer.getPlayerState !== "function") return;
-      const state = bgmPlayer.getPlayerState();
-      if (state === YT.PlayerState.PLAYING) {
-        bgmPlayer.pauseVideo();
-        try { sessionStorage.setItem("bgm_muted", "1"); } catch (e) {}
-        syncBgmUI(false);
-      } else {
-        bgmPlayer.unMute();
-        bgmPlayer.playVideo();
-        try { sessionStorage.setItem("bgm_muted", "0"); } catch (e) {}
-        syncBgmUI(true);
-      }
-    });
-  }
-
   // ================================================================
   // 3. LIVE SURAKARTA TIME CLOCK (WIB / UTC+7)
   // ================================================================
@@ -374,7 +230,7 @@
 
   // ================================================================
   // 6. SEAMLESS CLIENT-SIDE NAVIGATION (PJAX)
-  //    Preserves YouTube BGM player across page transitions without restart!
+  //    Seamless page transitions without full document reloads
   // ================================================================
   function updateNavActive(targetPath) {
     const isContact = targetPath.includes("contact");
@@ -508,7 +364,6 @@
   // ================================================================
   document.addEventListener("DOMContentLoaded", () => {
     initThemeToggle();
-    initBGM();
     updateClock();
     setInterval(updateClock, 1000);
     initScrollReveal();

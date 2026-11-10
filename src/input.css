@@ -80,12 +80,15 @@
     @apply absolute inset-x-0 bottom-0 h-[3px] bg-accent;
   }
 
-  .nav-link:hover {
-    @apply bg-fg text-bg;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link:hover {
+      background-color: rgb(var(--fg));
+      color: rgb(var(--bg));
+    }
 
-  .nav-link:hover::after {
-    @apply bg-accent;
+    .nav-link:hover::after {
+      background-color: rgb(var(--accent));
+    }
   }
 
   /* Display headline */
@@ -185,9 +188,13 @@
 .swiss-hover-row {
   transition: background-color 0.25s ease, padding-left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.swiss-hover-row:hover {
-  padding-left: 2.75rem; /* slight 4px indent slide on hover */
+
+@media (hover: hover) and (pointer: fine) {
+  .swiss-hover-row:hover {
+    padding-left: 2.75rem; /* slight indent slide on hover */
+  }
 }
+
 @media (max-width: 768px) {
   .swiss-hover-row:hover {
     padding-left: 1.25rem;

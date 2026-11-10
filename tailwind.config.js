@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   darkMode: "class",
   content: ["./public/**/*.{html,js}"],
@@ -24,5 +26,13 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-hamburgers")],
+  plugins: [
+    require("tailwind-hamburgers"),
+    // Only apply hover styles when the user actually has a pointer that can hover (mouse/touchpad),
+    // preventing sticky/inverted "hover" colors when tapping buttons on touch devices (Android/iOS)
+    plugin(function ({ addVariant }) {
+      addVariant("hover", "@media (hover: hover) and (pointer: fine)");
+      addVariant("group-hover", "@media (hover: hover) and (pointer: fine) { .group:hover & }");
+    }),
+  ],
 };
