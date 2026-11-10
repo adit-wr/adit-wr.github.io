@@ -83,7 +83,10 @@
       <div class="splash__arc splash__arc-black splash__arc-animated"></div>
     </div>
     <div class="splash__content">
-      <h1 class="splash__title">Cyatria Wichaksana Ristanto</h1>
+      <div class="splash__text-wrap">
+        <h1 class="splash__title">Cyatria Wichaksana Ristanto</h1>
+        <p class="splash__subtitle">Software Engineer</p>
+      </div>
     </div>
   </div>
   <noscript>
@@ -111,6 +114,21 @@
           <span class="text-[10px] font-medium opacity-60">03</span>Resume <svg class="inline-block h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
         </a>
       </nav>
+
+      <!-- Background Audio Toggle -->
+      <button id="bgm-toggle" type="button" aria-label="Toggle background music" aria-pressed="true" class="nav-link shrink-0 border-l mbl:!px-3 flex items-center gap-1.5" title="Toggle background music">
+        <svg id="bgm-icon-on" class="h-4 w-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <svg id="bgm-icon-off" class="hidden h-4 w-4 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <span id="bgm-label" class="mbl:hidden text-[10px] font-mono tracking-wider uppercase text-accent">BGM</span>
+      </button>
 
       <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" class="nav-link shrink-0 border-l mbl:!px-3">
         <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-4 w-4" aria-hidden="true">
@@ -509,6 +527,11 @@
       </div>
     </div>
   </footer>
+
+  <!-- Hidden YouTube Background Music Host (Plays continuously across pages) -->
+  <div id="yt-bgm-host" style="position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0.001;pointer-events:none;z-index:-9999;overflow:hidden;" aria-hidden="true">
+    <div id="yt-bgm-player"></div>
+  </div>
 
 </body>
 </html>

@@ -1,35 +1,57 @@
 /* ------------------------------------------------------------------
-   Theme toggle (light / dark) + scroll reveal
+   Swiss Portfolio — Main Script
+   - Splash Screen (Initial website open only)
+   - Continuous Background Music (YouTube Player API + Loop)
+   - Seamless Client-Side Navigation (Zero audio interruption)
+   - Theme Toggle (Light / Dark with circular transition)
+   - Live Surakarta WIB Clock
+   - Scroll Reveal & Interactive Filters
 ------------------------------------------------------------------- */
 (function () {
   const root = document.documentElement;
 
-  // 0. Splash screen — runs on index.html whenever #splash is present
-  (function () {
+  // ================================================================
+  // 0. SPLASH SCREEN (Shown only once when the website is opened)
+  // ================================================================
+  (function handleSplash() {
     const splash = document.getElementById("splash");
     if (!splash) return;
 
-    function hideSplash() {
-      splash.classList.add("is-hidden");
-      splash.addEventListener(
-        "transitionend",
-        () => splash.remove(),
-        { once: true }
-      );
-      // Fallback if the transition event never fires
-      setTimeout(() => splash.remove(), 1500);
-    }
+    let hasOpened = false;
+    try {
+      hasOpened = sessionStorage.getItem("splashShown") === "1";
+    } catch (e) {}
 
-    // Play glow & title animation, then smoothly fade out
-    window.addEventListener("load", () => setTimeout(hideSplash, 2600));
-    // Safety net: never leave the splash stuck on screen
-    setTimeout(hideSplash, 5000);
+    if (hasOpened) {
+      // Returning within the session (e.g. reload or navigation) — remove immediately
+      splash.remove();
+    } else {
+      // Initial website open — display full Glow Horizon animation then fade out
+      try {
+        sessionStorage.setItem("splashShown", "1");
+      } catch (e) {}
+
+      function hideSplash() {
+        splash.classList.add("is-hidden");
+        splash.addEventListener(
+          "transitionend",
+          () => splash.remove(),
+          { once: true }
+        );
+        setTimeout(() => splash.remove(), 1500);
+      }
+
+      window.addEventListener("load", () => setTimeout(hideSplash, 2600));
+      setTimeout(hideSplash, 5000);
+    }
   })();
 
+  // ================================================================
+  // 1. THEME TOGGLE (Light mode default + Circular ripple)
+  // ================================================================
   const readTheme = () => (root.classList.contains("dark") ? "dark" : "light");
 
-  // Sync button UI with the current theme (no persistence).
-  function syncUI(theme) {
+  function syncThemeUI(theme) {
     const dark = theme === "dark";
     const label = document.getElementById("theme-label");
     const sun = document.getElementById("theme-icon-sun");
@@ -51,90 +73,235 @@
   function storeTheme(theme) {
     try {
       localStorage.setItem("theme", theme);
-    } catch (e) {
-      /* storage unavailable (e.g. private mode) — session only */
-    }
+    } catch (e) {}
   }
 
   function applyTheme(theme) {
     root.classList.toggle("dark", theme === "dark");
     storeTheme(theme);
-    syncUI(theme);
+    syncThemeUI(theme);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // 1. Theme toggle with expanding circular ripple animation
-    syncUI(readTheme());
+  function initThemeToggle() {
+    syncThemeUI(readTheme());
     const toggle = document.getElementById("theme-toggle");
-    if (toggle) {
-      toggle.addEventListener("click", (event) => {
-        const nextTheme = readTheme() === "dark" ? "light" : "dark";
+    if (!toggle || toggle._hasListener) return;
+    toggle._hasListener = true;
 
-        // Check if browser supports View Transition API and user prefers motion
-        const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (!document.startViewTransition || isReduced) {
-          applyTheme(nextTheme);
-          return;
-        }
+    toggle.addEventListener("click", (event) => {
+      const nextTheme = readTheme() === "dark" ? "light" : "dark";
+      const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!document.startViewTransition || isReduced) {
+        applyTheme(nextTheme);
+        return;
+      }
 
-        const rect = toggle.getBoundingClientRect();
-        const x = event.clientX || rect.left + rect.width / 2;
-        const y = event.clientY || rect.top + rect.height / 2;
+      const rect = toggle.getBoundingClientRect();
+      const x = event.clientX || rect.left + rect.width / 2;
+      const y = event.clientY || rect.top + rect.height / 2;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
 
-        const endRadius = Math.hypot(
-          Math.max(x, window.innerWidth - x),
-          Math.max(y, window.innerHeight - y)
+      const transition = document.startViewTransition(() => {
+        applyTheme(nextTheme);
+      });
+
+      transition.ready.then(() => {
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`
+            ]
+          },
+          {
+            duration: 500,
+            easing: "ease-in-out",
+            pseudoElement: "::view-transition-new(root)"
+          }
         );
+      });
+    });
+  }
 
-        const transition = document.startViewTransition(() => {
-          applyTheme(nextTheme);
-        });
+  // ================================================================
+  // 2. BACKGROUND MUSIC (YouTube Player API — Continuous & Looping)
+  //    Video: https://youtu.be/Tqr0qXxevco
+  // ================================================================
+  const BGM_VIDEO_ID = "Tqr0qXxevco";
+  let bgmPlayer = null;
+  let bgmIsPlaying = false;
 
-        transition.ready.then(() => {
-          const clipPath = [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${endRadius}px at ${x}px ${y}px)`
-          ];
+  function syncBgmUI(isPlaying) {
+    bgmIsPlaying = isPlaying;
+    const iconOn = document.getElementById("bgm-icon-on");
+    const iconOff = document.getElementById("bgm-icon-off");
+    const label = document.getElementById("bgm-label");
+    const btn = document.getElementById("bgm-toggle");
 
-          document.documentElement.animate(
-            {
-              clipPath: clipPath
-            },
-            {
-              duration: 500,
-              easing: "ease-in-out",
-              pseudoElement: "::view-transition-new(root)"
+    if (iconOn) iconOn.classList.toggle("hidden", !isPlaying);
+    if (iconOff) iconOff.classList.toggle("hidden", isPlaying);
+    if (label) {
+      label.textContent = isPlaying ? "BGM" : "MUTED";
+      label.classList.toggle("text-accent", isPlaying);
+      label.classList.toggle("text-muted", !isPlaying);
+    }
+    if (btn) {
+      btn.setAttribute("aria-pressed", String(isPlaying));
+      btn.setAttribute("title", isPlaying ? "Pause background music" : "Play background music");
+    }
+  }
+
+  function initBGM() {
+    // If player already created, just sync UI and attach button listener
+    initBgmButton();
+    if (window._bgmInitialized) return;
+    window._bgmInitialized = true;
+
+    // Load YouTube IFrame API script once
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+
+    // Called when YouTube IFrame API is loaded
+    window.onYouTubeIframeAPIReady = function () {
+      const host = document.getElementById("yt-bgm-player");
+      if (!host) return;
+
+      const savedTime = parseFloat(sessionStorage.getItem("bgm_time")) || 0;
+      const userMuted = sessionStorage.getItem("bgm_muted") === "1";
+
+      bgmPlayer = new YT.Player("yt-bgm-player", {
+        height: "10",
+        width: "10",
+        videoId: BGM_VIDEO_ID,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          loop: 1,
+          playlist: BGM_VIDEO_ID, // Required by YouTube for looping
+          playsinline: 1,
+          rel: 0,
+          start: Math.floor(savedTime)
+        },
+        events: {
+          onReady: function (event) {
+            if (savedTime > 0) {
+              try { event.target.seekTo(savedTime, true); } catch (e) {}
             }
-          );
-        });
+            if (userMuted) {
+              try { event.target.mute(); } catch (e) {}
+              syncBgmUI(false);
+            } else {
+              try {
+                event.target.unMute();
+                event.target.playVideo();
+              } catch (e) {}
+            }
+
+            // Track playback position every 500ms for state preservation
+            setInterval(() => {
+              if (bgmPlayer && typeof bgmPlayer.getCurrentTime === "function") {
+                try {
+                  const cur = bgmPlayer.getCurrentTime();
+                  if (cur > 0) {
+                    sessionStorage.setItem("bgm_time", String(cur));
+                  }
+                } catch (e) {}
+              }
+            }, 500);
+          },
+          onStateChange: function (event) {
+            // Loop from start if finished
+            if (event.data === YT.PlayerState.ENDED) {
+              try {
+                event.target.seekTo(0);
+                event.target.playVideo();
+              } catch (e) {}
+            }
+            if (event.data === YT.PlayerState.PLAYING) {
+              syncBgmUI(true);
+            } else if (event.data === YT.PlayerState.PAUSED) {
+              syncBgmUI(false);
+            }
+          }
+        }
       });
+    };
+
+    // Autoplay policy unlocked on first user interaction
+    const unlockAutoplay = () => {
+      if (sessionStorage.getItem("bgm_muted") !== "1" && bgmPlayer && typeof bgmPlayer.playVideo === "function") {
+        try {
+          bgmPlayer.unMute();
+          bgmPlayer.playVideo();
+        } catch (e) {}
+      }
+    };
+    ["click", "touchstart", "keydown"].forEach((evt) => {
+      window.addEventListener(evt, unlockAutoplay, { once: true, passive: true });
+    });
+  }
+
+  function initBgmButton() {
+    const btn = document.getElementById("bgm-toggle");
+    if (!btn || btn._hasListener) return;
+    btn._hasListener = true;
+
+    btn.addEventListener("click", () => {
+      if (!bgmPlayer || typeof bgmPlayer.getPlayerState !== "function") return;
+      const state = bgmPlayer.getPlayerState();
+      if (state === YT.PlayerState.PLAYING) {
+        bgmPlayer.pauseVideo();
+        try { sessionStorage.setItem("bgm_muted", "1"); } catch (e) {}
+        syncBgmUI(false);
+      } else {
+        bgmPlayer.unMute();
+        bgmPlayer.playVideo();
+        try { sessionStorage.setItem("bgm_muted", "0"); } catch (e) {}
+        syncBgmUI(true);
+      }
+    });
+  }
+
+  // ================================================================
+  // 3. LIVE SURAKARTA TIME CLOCK (WIB / UTC+7)
+  // ================================================================
+  function updateClock() {
+    const clockElements = document.querySelectorAll(".live-clock");
+    if (!clockElements.length) return;
+
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString("en-GB", {
+      timeZone: "Asia/Jakarta",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false
+    });
+
+    clockElements.forEach((el) => {
+      el.innerHTML = `<span class="font-light tracking-wide text-muted">Surakarta</span> <span class="font-mono font-bold text-accent">${timeStr}</span> <span class="font-normal text-muted">WIB</span>`;
+    });
+  }
+
+  // ================================================================
+  // 4. SCROLL REVEAL & WORK FILTERS
+  // ================================================================
+  let scrollObserver = null;
+
+  function initScrollReveal() {
+    if (scrollObserver) {
+      scrollObserver.disconnect();
     }
 
-    // 2. Live Surakarta Clock (WIB: UTC+7)
-    function updateClock() {
-      const clockElements = document.querySelectorAll(".live-clock");
-      if (!clockElements.length) return;
-
-      const now = new Date();
-      // Format time in Asia/Jakarta timezone
-      const timeStr = now.toLocaleTimeString("en-GB", {
-        timeZone: "Asia/Jakarta",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-      });
-
-      clockElements.forEach((el) => {
-        el.innerHTML = `<span class="font-light tracking-wide text-muted">Surakarta</span> <span class="font-mono font-bold text-accent">${timeStr}</span> <span class="font-normal text-muted">WIB</span>`;
-      });
-    }
-
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    // 3. Scroll reveal
-    const observer = new IntersectionObserver(
+    scrollObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           entry.target.classList.toggle("active", entry.isIntersecting);
@@ -145,9 +312,10 @@
 
     document
       .querySelectorAll(".fade-in-left, .fade-in-right, .fade-in-top, .fade-in-bot, .fade, .swiss-line, .reveal-mask")
-      .forEach((el) => observer.observe(el));
+      .forEach((el) => scrollObserver.observe(el));
+  }
 
-    // 4. Selected Work Filter Tabs
+  function initProjectFilters() {
     const filterButtons = document.querySelectorAll(".project-filter-btn");
     const projectRows = document.querySelectorAll(".project-row");
 
@@ -156,7 +324,6 @@
         btn.addEventListener("click", () => {
           const filter = btn.getAttribute("data-filter");
 
-          // Update active button state
           filterButtons.forEach((b) => {
             b.classList.remove("bg-fg", "text-bg");
             b.classList.add("hover:bg-fg/10");
@@ -166,7 +333,6 @@
           btn.classList.remove("hover:bg-fg/10");
           btn.setAttribute("aria-selected", "true");
 
-          // Filter projects
           projectRows.forEach((row) => {
             const category = row.getAttribute("data-category");
             if (filter === "all" || category === filter) {
@@ -178,6 +344,176 @@
         });
       });
     }
+  }
 
+  // ================================================================
+  // 5. CONTACT FORM (Standard mailto encoding without plus '+' signs)
+  // ================================================================
+  function initContactForm() {
+    const form = document.getElementById("contact-form");
+    if (!form || form._hasSubmitListener) return;
+    form._hasSubmitListener = true;
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const subjectInput = document.getElementById("contact-subject");
+      const bodyInput = document.getElementById("contact-body");
+
+      const subject = subjectInput ? subjectInput.value.trim() : "";
+      const body = bodyInput ? bodyInput.value.trim() : "";
+
+      // encodeURIComponent encodes spaces as %20, avoiding the literal plus (+) bug
+      const encodedSubject = encodeURIComponent(subject);
+      const encodedBody = encodeURIComponent(body);
+
+      const mailtoUrl = `mailto:aditwichaksana@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+
+      window.location.href = mailtoUrl;
+    });
+  }
+
+  // ================================================================
+  // 6. SEAMLESS CLIENT-SIDE NAVIGATION (PJAX)
+  //    Preserves YouTube BGM player across page transitions without restart!
+  // ================================================================
+  function updateNavActive(targetPath) {
+    const isContact = targetPath.includes("contact");
+
+    // Desktop nav
+    const desktopAbout = document.querySelector('nav[aria-label="Primary"] a[href*="index.html"]');
+    const desktopContact = document.querySelector('nav[aria-label="Primary"] a[href*="contact.html"]');
+
+    if (desktopAbout) {
+      if (isContact) desktopAbout.removeAttribute("aria-current");
+      else desktopAbout.setAttribute("aria-current", "page");
+    }
+    if (desktopContact) {
+      if (isContact) desktopContact.setAttribute("aria-current", "page");
+      else desktopContact.removeAttribute("aria-current");
+    }
+
+    // Mobile nav
+    const mobileAbout = document.querySelector('nav[aria-label="Primary mobile"] a[href*="index.html"]');
+    const mobileContact = document.querySelector('nav[aria-label="Primary mobile"] a[href*="contact.html"]');
+
+    const activeClasses = [
+      "text-accent",
+      "relative",
+      "after:content-['']",
+      "after:absolute",
+      "after:inset-x-0",
+      "after:bottom-0",
+      "after:h-[2.5px]",
+      "after:bg-accent"
+    ];
+
+    if (mobileAbout && mobileContact) {
+      if (isContact) {
+        mobileAbout.classList.remove(...activeClasses);
+        mobileAbout.classList.add("text-fg/80");
+        mobileAbout.removeAttribute("aria-current");
+
+        mobileContact.classList.add(...activeClasses);
+        mobileContact.classList.remove("text-fg/80");
+        mobileContact.setAttribute("aria-current", "page");
+      } else {
+        mobileContact.classList.remove(...activeClasses);
+        mobileContact.classList.add("text-fg/80");
+        mobileContact.removeAttribute("aria-current");
+
+        mobileAbout.classList.add(...activeClasses);
+        mobileAbout.classList.remove("text-fg/80");
+        mobileAbout.setAttribute("aria-current", "page");
+      }
+    }
+  }
+
+  async function navigateTo(url, push = true) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        window.location.href = url;
+        return;
+      }
+      const htmlText = await response.text();
+      const parser = new DOMParser();
+      const newDoc = parser.parseFromString(htmlText, "text/html");
+
+      // 1. Update Title
+      if (newDoc.title) {
+        document.title = newDoc.title;
+      }
+
+      // 2. Replace <main> content
+      const newMain = newDoc.querySelector("main");
+      const currentMain = document.querySelector("main");
+      if (newMain && currentMain) {
+        currentMain.innerHTML = newMain.innerHTML;
+      }
+
+      // 3. Update active nav indicator in header
+      updateNavActive(url);
+
+      // 4. Scroll to top
+      window.scrollTo({ top: 0, behavior: "instant" });
+
+      // 5. Re-initialize page specific scripts
+      initScrollReveal();
+      initProjectFilters();
+      initContactForm();
+
+      // 6. Push browser history
+      if (push) {
+        history.pushState({ path: url }, "", url);
+      }
+    } catch (err) {
+      // Fallback to normal navigation if fetch fails
+      window.location.href = url;
+    }
+  }
+
+  function initSeamlessNav() {
+    document.addEventListener("click", (event) => {
+      // Find closest anchor tag
+      const link = event.target.closest("a");
+      if (!link) return;
+
+      const href = link.getAttribute("href");
+      if (!href) return;
+
+      // Ignore external links, mailto, target="_blank", or hash jumps
+      if (
+        href.startsWith("http") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("#") ||
+        link.getAttribute("target") === "_blank"
+      ) {
+        return;
+      }
+
+      // Internal page links (index.html or contact.html)
+      if (href.includes("index.html") || href.includes("contact.html")) {
+        event.preventDefault();
+        navigateTo(href);
+      }
+    });
+
+    window.addEventListener("popstate", (event) => {
+      navigateTo(window.location.pathname || "./index.html", false);
+    });
+  }
+
+  // ================================================================
+  // INITIALIZATION ON DOM READY
+  // ================================================================
+  document.addEventListener("DOMContentLoaded", () => {
+    initThemeToggle();
+    initBGM();
+    updateClock();
+    setInterval(updateClock, 1000);
+    initScrollReveal();
+    initProjectFilters();
+    initContactForm();
+    initSeamlessNav();
   });
 })();
