@@ -203,28 +203,265 @@
   }
 
   // ================================================================
-  // 5. CONTACT FORM (Standard mailto encoding without plus '+' signs)
+  // 5. CONTACT FORM — Cybersecurity hardened with rate-limiting
+  //
+  // Protections:
+  //  • Honeypot field (bots fill it, humans don't) — silently rejected
+  //  • Daily message quota per browser (localStorage): max 3 / day
+  //  • Cooldown between submissions: 10 minutes (localStorage)
+  //  • Subject sanitization: strip HTML/tags & dangerous headers
+  //  • Body sanitization: strip HTML tags, control chars, email header injection
+  //  • Live character counter (0/120 subject, 0/1500 body)
+  //  • URL / javascript: / data: payload detection & rejection (XSS)
+  //  • Send button locked during cooldown with countdown
+  //  • encodeURIComponent — spaces become %20 (never '+')
+  // Note: mailto: itself is client-side, so a determined abuser can open their
+  // mail client manually. These layers stop accidental spam, scripted bots,
+  // and XSS/header injection from the messages they generate.
   // ================================================================
+  const CONTACT_LIMITS = {
+    DAILY_MAX: 3,                    // max messages per browser per rolling 24h
+    COOLDOWN_MS: 10 * 60 * 1000,     // 10 min cooldown between sends
+    STORAGE_KEY_TS: "contact_last_ts",
+    STORAGE_KEY_DAILY: "contact_daily_log"
+  };
+
+  function contactReadDailyLog() {
+    try {
+      const raw = localStorage.getItem(CONTACT_LIMITS.STORAGE_KEY_DAILY);
+      const arr = raw ? JSON.parse(raw) : [];
+      const now = Date.now();
+      const valid = arr.filter((ts) => now - ts < 24 * 60 * 60 * 1000);
+      if (valid.length !== arr.length) {
+        localStorage.setItem(CONTACT_LIMITS.STORAGE_KEY_DAILY, JSON.stringify(valid));
+      }
+      return valid;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function contactWriteDailyLog(log) {
+    try {
+      localStorage.setItem(CONTACT_LIMITS.STORAGE_KEY_DAILY, JSON.stringify(log));
+    } catch (e) {}
+  }
+
+  function contactLastSend() {
+    try {
+      return Number(localStorage.getItem(CONTACT_LIMITS.STORAGE_KEY_TS)) || 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  function contactSetLastSend(ts) {
+    try {
+      localStorage.setItem(CONTACT_LIMITS.STORAGE_KEY_TS, String(ts));
+    } catch (e) {}
+  }
+
+  function contactCooldownRemainingMs() {
+    const last = contactLastSend();
+    if (!last) return 0;
+    const elapsed = Date.now() - last;
+    return Math.max(0, CONTACT_LIMITS.COOLDOWN_MS - elapsed);
+  }
+
+  // Strip HTML tags, scripts and dangerous protocols from a plain-text string
+  function contactSanitize(input) {
+    if (!input) return "";
+    return String(input)
+      // remove HTML tags
+      .replace(/<[^>]*>/g, "")
+      // defang dangerous protocols (XSS)
+      .replace(/javascript\s*:/gi, "")
+      .replace(/data\s*:/gi, "")
+      .replace(/vbscript\s*:/gi, "")
+      .replace(/on\w+\s*=/gi, "")
+      // strip control characters (except normal whitespace/newlines)
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "")
+      .trim();
+  }
+
+  // Detect header injection (newlines + To/Cc/Bcc/Subject) inside subject
+  function contactHasHeaderInjection(subject) {
+    return /(\r|\n|%0d|%0a|to:|cc:|bcc:|subject:)/i.test(subject);
+  }
+
+  // Detect common script/XSS payloads anywhere in the text
+  function contactHasDangerousPayload(text) {
+    return /(<script|<img|<iframe|onerror\s*=|onclick\s*=|onload\s*=|<svg|<style|<link|<meta)/i.test(text);
+  }
+
+  function contactShowStatus(message, kind) {
+    const status = document.getElementById("form-status");
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove("hidden", "error", "ok");
+    status.classList.add(kind === "ok" ? "ok" : "error");
+  }
+
+  function contactHideStatus() {
+    const status = document.getElementById("form-status");
+    if (status) {
+      status.classList.add("hidden");
+      status.textContent = "";
+    }
+  }
+
+  function contactFormatRemaining(ms) {
+    const totalSeconds = Math.ceil(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+
+  function contactUpdateLockUI() {
+    const btn = document.getElementById("contact-submit-btn");
+    const label = document.getElementById("contact-submit-label");
+    if (!btn || !label) return;
+
+    const remaining = contactCooldownRemainingMs();
+    const dailyLog = contactReadDailyLog();
+    const dailyUsed = dailyLog.length;
+
+    if (remaining > 0) {
+      btn.disabled = true;
+      label.textContent = `Wait — retry in ${contactFormatRemaining(remaining)}`;
+    } else if (dailyUsed >= CONTACT_LIMITS.DAILY_MAX) {
+      btn.disabled = true;
+      label.textContent = "Daily limit reached (3 / 24h)";
+    } else {
+      btn.disabled = false;
+      label.textContent = "Send via Email Client";
+    }
+  }
+
   function initContactForm() {
     const form = document.getElementById("contact-form");
-    if (!form || form._hasSubmitListener) return;
+    if (!form) return;
+
+    // Wipe any stale state from a previous PJAX navigation
+    form._hasSubmitListener = false;
+
+    const subjectInput = document.getElementById("contact-subject");
+    const bodyInput = document.getElementById("contact-body");
+    const subjectCounter = document.getElementById("subject-counter");
+    const bodyCounter = document.getElementById("body-counter");
+    const honeypot = document.getElementById("contact-website");
+
+    // Live character counters
+    if (subjectInput && !subjectInput._hasCounter) {
+      subjectInput._hasCounter = true;
+      subjectInput.addEventListener("input", () => {
+        if (subjectCounter) subjectCounter.textContent = `${subjectInput.value.length} / 120`;
+      });
+    }
+    if (bodyInput && !bodyInput._hasCounter) {
+      bodyInput._hasCounter = true;
+      bodyInput.addEventListener("input", () => {
+        if (bodyCounter) bodyCounter.textContent = `${bodyInput.value.length} / 1500`;
+      });
+    }
+
+    // Initialise lock state on load (handles refresh during cooldown)
+    contactUpdateLockUI();
+    // Keep the countdown ticking while the page is open
+    if (!window._contactCooldownTimer) {
+      window._contactCooldownTimer = setInterval(contactUpdateLockUI, 1000);
+    }
+
+    if (form._hasSubmitListener) return;
     form._hasSubmitListener = true;
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const subjectInput = document.getElementById("contact-subject");
-      const bodyInput = document.getElementById("contact-body");
+      contactHideStatus();
 
-      const subject = subjectInput ? subjectInput.value.trim() : "";
-      const body = bodyInput ? bodyInput.value.trim() : "";
+      // 1) Honeypot — silent reject, tell bot nothing
+      if (honeypot && honeypot.value.trim() !== "") {
+        // Pretend success to the bot
+        contactShowStatus("Message sent. I will reply within 24 hours.", "ok");
+        form.reset();
+        return;
+      }
 
-      // encodeURIComponent encodes spaces as %20, avoiding the literal plus (+) bug
+      // 2) Cooldown check
+      const remaining = contactCooldownRemainingMs();
+      if (remaining > 0) {
+        contactShowStatus(`Please wait ${contactFormatRemaining(remaining)} before sending another message.`, "error");
+        contactUpdateLockUI();
+        return;
+      }
+
+      // 3) Daily quota check
+      const dailyLog = contactReadDailyLog();
+      if (dailyLog.length >= CONTACT_LIMITS.DAILY_MAX) {
+        contactShowStatus("Daily message limit reached (3 messages per 24 hours). Please try again tomorrow.", "error");
+        contactUpdateLockUI();
+        return;
+      }
+
+      const rawSubject = subjectInput ? subjectInput.value : "";
+      const rawBody = bodyInput ? bodyInput.value : "";
+
+      // 4) Required-field check (defence in depth on top of HTML5 required)
+      if (!rawSubject.trim() || !rawBody.trim()) {
+        contactShowStatus("Subject and message are required.", "error");
+        return;
+      }
+
+      // 5) Sanitize
+      const subject = contactSanitize(rawSubject).slice(0, 120);
+      const body = contactSanitize(rawBody).slice(0, 1500);
+
+      // 6) Header injection / XSS payload detection
+      if (contactHasHeaderInjection(subject)) {
+        contactShowStatus("Subject contains illegal header characters.", "error");
+        return;
+      }
+      if (contactHasDangerousPayload(rawSubject) || contactHasDangerousPayload(rawBody)) {
+        contactShowStatus("Message rejected: contains unsafe content.", "error");
+        return;
+      }
+
+      // 7) Length floor — blocks empty/one-char spam
+      if (subject.length < 3) {
+        contactShowStatus("Subject must be at least 3 characters.", "error");
+        return;
+      }
+      if (body.length < 10) {
+        contactShowStatus("Message must be at least 10 characters.", "error");
+        return;
+      }
+
+      // 8) Log the send (rate-limit state) BEFORE opening the mail client,
+      //    so refreshing the page cannot bypass the cooldown
+      const now = Date.now();
+      contactSetLastSend(now);
+      contactWriteDailyLog([...dailyLog, now]);
+
+      // 9) Standard RFC 6068 percent-encoding — spaces become %20, never '+'
       const encodedSubject = encodeURIComponent(subject);
       const encodedBody = encodeURIComponent(body);
-
       const mailtoUrl = `mailto:aditwichaksana@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
 
+      // 10) Soft cap on mailto URL length (~2000 chars is safe across mail clients)
+      if (mailtoUrl.length > 1800) {
+        contactShowStatus("Message is too long for your mail client. Please shorten the body.", "error");
+        // roll back the log entry we just added
+        contactSetLastSend(0);
+        contactWriteDailyLog(dailyLog);
+        return;
+      }
+
+      contactShowStatus("Opening your mail client…", "ok");
       window.location.href = mailtoUrl;
+
+      // Lock the button and start the countdown
+      contactUpdateLockUI();
     });
   }
 

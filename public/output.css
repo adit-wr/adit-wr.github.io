@@ -638,6 +638,15 @@ h1,
 
 /* Uppercase micro-label, the Swiss workhorse */
 
+.\!label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  --tw-text-opacity: 1;
+  color: rgb(var(--muted) / var(--tw-text-opacity, 1));
+}
+
 .label {
   font-size: 11px;
   font-weight: 500;
@@ -709,6 +718,10 @@ h1,
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .relative {
@@ -798,6 +811,10 @@ h1,
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .mt-8 {
@@ -922,6 +939,10 @@ h1,
 
 .max-w-\[1400px\] {
   max-width: 1400px;
+}
+
+.max-w-\[58ch\] {
+  max-width: 58ch;
 }
 
 .max-w-\[70ch\] {
@@ -1114,12 +1135,21 @@ h1,
   border-left-width: 1px;
 }
 
+.border-l-2 {
+  border-left-width: 2px;
+}
+
 .border-r {
   border-right-width: 1px;
 }
 
 .border-t {
   border-top-width: 1px;
+}
+
+.border-accent {
+  --tw-border-opacity: 1;
+  border-color: rgb(var(--accent) / var(--tw-border-opacity, 1));
 }
 
 .border-accent\/30 {
@@ -1276,6 +1306,10 @@ h1,
   padding-bottom: 2rem;
 }
 
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
 .pl-8 {
   padding-left: 2rem;
 }
@@ -1320,6 +1354,10 @@ h1,
 
 .text-\[12px\] {
   font-size: 12px;
+}
+
+.text-\[15px\] {
+  font-size: 15px;
 }
 
 .text-\[16px\] {
@@ -1385,6 +1423,10 @@ h1,
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.leading-\[1\.75\] {
+  line-height: 1.75;
 }
 
 .leading-\[1\.8\] {
@@ -1460,6 +1502,10 @@ h1,
 
 .text-fg\/80 {
   color: rgb(var(--fg) / 0.8);
+}
+
+.text-fg\/85 {
+  color: rgb(var(--fg) / 0.85);
 }
 
 .text-muted {
@@ -1638,6 +1684,42 @@ h1,
   .swiss-hover-row:hover {
     padding-left: 1.25rem;
   }
+}
+
+/* ================================================================
+   Contact form — cybersecurity & UX states
+   ================================================================ */
+
+.form-status {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgb(var(--line));
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.form-status.ok {
+  border-color: #16a34a;
+  background-color: rgb(22 163 74 / 0.08);
+  color: #15803d;
+}
+
+.form-status.error {
+  border-color: #dc2626;
+  background-color: rgb(220 38 38 / 0.08);
+  color: #b91c1c;
+}
+
+html.dark .form-status.ok {
+  border-color: #4ade80;
+  background-color: rgb(74 222 128 / 0.08);
+  color: #86efac;
+}
+
+html.dark .form-status.error {
+  border-color: #f87171;
+  background-color: rgb(248 113 113 / 0.08);
+  color: #fca5a5;
 }
 
 /* Stagger delay helpers */
@@ -1914,6 +1996,14 @@ h1,
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.disabled\:cursor-not-allowed:disabled {
+  cursor: not-allowed;
+}
+
+.disabled\:opacity-60:disabled {
+  opacity: 0.6;
 }
 
 @media (hover: hover) and (pointer: fine) {

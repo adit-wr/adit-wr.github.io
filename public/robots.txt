@@ -1,4 +1,7 @@
+# robots.txt — cyatria-porto.vercel.app
+# Allow all crawlers (Googlebot, Bingbot, etc.) to index the portfolio
 User-agent: *
 Allow: /
 
-Sitemap: https://adit-wr.github.io/sitemap.xml
+# Sitemap location for faster Google discovery & indexing
+Sitemap: https://cyatria-porto.vercel.app/sitemap.xml
