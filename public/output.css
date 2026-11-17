@@ -556,68 +556,68 @@ video {
 
 :root {
   color-scheme: light;
-  --bg: 219 39 119;
-  /* Hot Pink #db2777      */
-  --fg: 255 255 255;
-  /* White ink             */
-  --muted: 249 168 212;
-  /* Pink-300 ink          */
-  --line: 244 114 182;
-  /* Pink-400 hairline     */
-  --surface: 236 72 153;
-  /* Pink-500 lifted       */
-  --accent: 255 255 255;
-  /* White — primary       */
-  --pink: 255 255 255;
-  /* White — secondary     */
-  --yellow: 255 255 255;
-  /* White — tertiary      */
-  --onaccent: 219 39 119;
-  /* Hot pink on white     */
+  --bg: 255 199 199;
+  /* Blush Pink #FFC7C7    */
+  --fg: 60 34 24;
+  /* Dark Brown #3C2218    */
+  --muted: 125 79 66;
+  /* Muted cocoa ink       */
+  --line: 226 163 163;
+  /* Soft rose hairline    */
+  --surface: 242 181 181;
+  /* Deepened blush hover  */
+  --accent: 60 34 24;
+  /* Dark Brown — primary  */
+  --pink: 60 34 24;
+  /* Dark Brown — secondary*/
+  --yellow: 60 34 24;
+  /* Dark Brown — tertiary */
+  --onaccent: 255 199 199;
+  /* Blush pink on brown   */
 }
 
 html.\!dark {
   color-scheme: dark !important;
-  --bg: 59 10 36 !important;
-  /* Deep wine             */
-  --fg: 255 255 255 !important;
-  /* White ink             */
-  --muted: 244 180 205 !important;
-  /* Soft rose ink         */
-  --line: 118 44 76 !important;
-  /* Wine hairline         */
-  --surface: 76 20 48 !important;
-  /* Lifted wine           */
-  --accent: 255 255 255 !important;
-  /* White — primary       */
-  --pink: 255 255 255 !important;
-  /* White — secondary     */
-  --yellow: 255 255 255 !important;
-  /* White — tertiary      */
-  --onaccent: 219 39 119 !important;
-  /* Hot pink on white     */
+  --bg: 60 34 24 !important;
+  /* Dark Brown #3C2218    */
+  --fg: 255 199 199 !important;
+  /* Blush Pink #FFC7C7    */
+  --muted: 217 160 141 !important;
+  /* Soft tan ink          */
+  --line: 93 64 52 !important;
+  /* Wine-brown hairline   */
+  --surface: 74 44 34 !important;
+  /* Lifted brown          */
+  --accent: 255 199 199 !important;
+  /* Blush Pink — primary  */
+  --pink: 255 199 199 !important;
+  /* Blush Pink — secondary*/
+  --yellow: 255 199 199 !important;
+  /* Blush Pink — tertiary */
+  --onaccent: 60 34 24 !important;
+  /* Dark Brown on blush   */
 }
 
 html.dark {
   color-scheme: dark;
-  --bg: 59 10 36;
-  /* Deep wine             */
-  --fg: 255 255 255;
-  /* White ink             */
-  --muted: 244 180 205;
-  /* Soft rose ink         */
-  --line: 118 44 76;
-  /* Wine hairline         */
-  --surface: 76 20 48;
-  /* Lifted wine           */
-  --accent: 255 255 255;
-  /* White — primary       */
-  --pink: 255 255 255;
-  /* White — secondary     */
-  --yellow: 255 255 255;
-  /* White — tertiary      */
-  --onaccent: 219 39 119;
-  /* Hot pink on white     */
+  --bg: 60 34 24;
+  /* Dark Brown #3C2218    */
+  --fg: 255 199 199;
+  /* Blush Pink #FFC7C7    */
+  --muted: 217 160 141;
+  /* Soft tan ink          */
+  --line: 93 64 52;
+  /* Wine-brown hairline   */
+  --surface: 74 44 34;
+  /* Lifted brown          */
+  --accent: 255 199 199;
+  /* Blush Pink — primary  */
+  --pink: 255 199 199;
+  /* Blush Pink — secondary*/
+  --yellow: 255 199 199;
+  /* Blush Pink — tertiary */
+  --onaccent: 60 34 24;
+  /* Dark Brown on blush   */
 }
 
 html {
@@ -1287,6 +1287,14 @@ h1,
   background-color: rgb(var(--fg) / var(--tw-bg-opacity, 1));
 }
 
+.bg-fg\/30 {
+  background-color: rgb(var(--fg) / 0.3);
+}
+
+.bg-fg\/60 {
+  background-color: rgb(var(--fg) / 0.6);
+}
+
 .bg-pink {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--pink) / var(--tw-bg-opacity, 1));
@@ -1298,19 +1306,6 @@ h1,
 
 .bg-surface\/50 {
   background-color: rgb(var(--surface) / 0.5);
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.bg-white\/30 {
-  background-color: rgb(255 255 255 / 0.3);
-}
-
-.bg-white\/60 {
-  background-color: rgb(255 255 255 / 0.6);
 }
 
 .bg-yellow {
@@ -1895,7 +1890,7 @@ html.dark .form-status.error {
   inset: 0;
   z-index: 9999;
   overflow: hidden;
-  background: rgb(var(--bg));
+  background: #3c2218;
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
@@ -1998,7 +1993,7 @@ html.dark .form-status.error {
   }
 }
 
-/* Hot pink family: White (horizon), Pale Rose (wide glow), Rose (deep glow), Black (depth) */
+/* Deep brown family: Blush White (horizon), Pale Salmon (wide glow), Salmon (deep glow), Black (depth) */
 
 .splash__arc-white  {
   --color: #fff;
@@ -2008,14 +2003,14 @@ html.dark .form-status.error {
 
 .splash__arc-purple,
 .splash__arc-cyan   {
-  --color: #f9a8d4;
+  --color: #ffc7c7;
   --size: 1.20;
   --delay: 0.6s;
   filter: blur(31px);
 }
 
 .splash__arc-blue   {
-  --color: #f472b6;
+  --color: #d9a08d;
   --size: 1.24;
   --delay: 0s;
   filter: blur(24px);
@@ -2058,7 +2053,7 @@ html.dark .form-status.error {
 }
 
 .splash__subtitle {
-  color: rgba(255, 255, 255, 0.92);
+  color: #ffc7c7;
   font-family: "Inter Tight", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 700;
   font-size: clamp(0.85rem, 2.2vw, 1.25rem);
