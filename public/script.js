@@ -455,7 +455,7 @@
           headers: { "Content-Type": "application/json", "Accept": "application/json" },
           body: JSON.stringify({
             subject,
-            message,
+            message: body,
             botcheck: honeypot ? honeypot.value : ""
           })
         });
@@ -468,13 +468,18 @@
           if (subjectCounter) subjectCounter.textContent = "0 / 120";
           if (bodyCounter) bodyCounter.textContent = "0 / 1500";
         } else {
-          throw new Error((data && data.message) || "Web3Forms rejected the message");
+          const msg = (data && data.message) ? String(data.message).trim().slice(0, 200) : "";
+          throw new Error(msg || "Web3Forms rejected the message");
         }
       } catch (err) {
         // Roll back the rate-limit entry so an honest user can retry
         contactSetLastSend(0);
         contactWriteDailyLog(dailyLog);
-        contactShowStatus("Failed to send — please try again or email aditwichaksana@gmail.com directly.", "error");
+        const friendly = err && err.message ? String(err.message) : "";
+        console.error("[contact] send failed:", err);
+        contactShowStatus(friendly
+          ? `Failed to send — ${friendly}`
+          : "Failed to send — please try again or email aditwichaksana@gmail.com directly.", "error");
       }
 
       // Lock the button and start the countdown
