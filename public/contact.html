@@ -234,7 +234,7 @@
           <h3 class="headline mt-3 text-2xl font-black uppercase tracking-[-0.03em]">Write an Inquiry</h3>
           <p class="mt-2 text-sm text-muted">Fill in your message below to compose directly to my inbox.</p>
 
-          <form id="contact-form" action="mailto:aditwichaksana@gmail.com" method="GET" class="mt-8 flex flex-col gap-6" autocomplete="off" novalidate>
+          <form id="contact-form" action="/api/submit" method="POST" class="mt-8 flex flex-col gap-6" autocomplete="off" novalidate>
             <!-- Honeypot: invisible to humans, traps bots & spam scripts -->
             <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
               <label for="contact-website">Website (leave empty)</label>
@@ -264,12 +264,12 @@
             <p id="form-status" role="alert" aria-live="polite" class="form-status hidden"></p>
 
             <p class="text-[11px] leading-relaxed text-muted">
-              Protected by rate-limiting and input sanitization. Your message opens in your default mail client — nothing is stored on this server.
+              Protected by rate-limiting, honeypot and input sanitization. Your message is sent directly to my inbox — no mail client required.
             </p>
 
             <button type="submit" id="contact-submit-btn"
                     class="group flex items-center justify-between bg-accent px-6 py-4 font-bold uppercase tracking-wider text-onaccent transition-colors duration-200 hover:bg-fg hover:text-bg disabled:cursor-not-allowed disabled:opacity-60">
-              <span id="contact-submit-label">Send via Email Client</span>
+              <span id="contact-submit-label">Send Message</span>
               <svg class="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
             </button>
           </form>

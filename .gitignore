@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Local env files — NEVER commit real keys
+.env
+.env.*
+!.env.example
+
+# Vercel local dev
+.vercel
+
+# OS
+.DS_Store

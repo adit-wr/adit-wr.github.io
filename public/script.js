@@ -214,10 +214,9 @@
   //  • Live character counter (0/120 subject, 0/1500 body)
   //  • URL / javascript: / data: payload detection & rejection (XSS)
   //  • Send button locked during cooldown with countdown
-  //  • encodeURIComponent — spaces become %20 (never '+')
-  // Note: mailto: itself is client-side, so a determined abuser can open their
-  // mail client manually. These layers stop accidental spam, scripted bots,
-  // and XSS/header injection from the messages they generate.
+  //  • Web3Forms API — no mail client needed, delivers straight to inbox
+  // Note: client-side checks stop accidental spam, scripted bots and XSS.
+  //       Web3Forms adds server-side spam filtering on top (honeypot + filters).
   // ================================================================
   const CONTACT_LIMITS = {
     DAILY_MAX: 3,                    // max messages per browser per rolling 24h
@@ -335,7 +334,7 @@
       label.textContent = "Daily limit reached (3 / 24h)";
     } else {
       btn.disabled = false;
-      label.textContent = "Send via Email Client";
+      label.textContent = "Send Message";
     }
   }
 
@@ -376,7 +375,7 @@
     if (form._hasSubmitListener) return;
     form._hasSubmitListener = true;
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       contactHideStatus();
 
@@ -437,28 +436,46 @@
         return;
       }
 
-      // 8) Log the send (rate-limit state) BEFORE opening the mail client,
+      // 8) Log the send (rate-limit state) BEFORE hitting the network,
       //    so refreshing the page cannot bypass the cooldown
       const now = Date.now();
       contactSetLastSend(now);
       contactWriteDailyLog([...dailyLog, now]);
+      const btn = document.getElementById("contact-submit-btn");
+      const btnLabel = document.getElementById("contact-submit-label");
 
-      // 9) Standard RFC 6068 percent-encoding — spaces become %20, never '+'
-      const encodedSubject = encodeURIComponent(subject);
-      const encodedBody = encodeURIComponent(body);
-      const mailtoUrl = `mailto:aditwichaksana@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+      // 9) Ship it to /api/submit — serverless proxy, Web3Forms key never reaches the browser
+      contactShowStatus("Sending message…", "ok");
+      if (btn) btn.disabled = true;
+      if (btnLabel) btnLabel.textContent = "Sending…";
 
-      // 10) Soft cap on mailto URL length (~2000 chars is safe across mail clients)
-      if (mailtoUrl.length > 1800) {
-        contactShowStatus("Message is too long for your mail client. Please shorten the body.", "error");
-        // roll back the log entry we just added
+      try {
+        const response = await fetch("/api/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            subject,
+            message,
+            botcheck: honeypot ? honeypot.value : ""
+          })
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok && data.success) {
+          // Honeypot triggered server-side or genuine send — either way, show success
+          contactShowStatus("Message sent — I will reply within 24 hours.", "ok");
+          form.reset();
+          if (subjectCounter) subjectCounter.textContent = "0 / 120";
+          if (bodyCounter) bodyCounter.textContent = "0 / 1500";
+        } else {
+          throw new Error((data && data.message) || "Web3Forms rejected the message");
+        }
+      } catch (err) {
+        // Roll back the rate-limit entry so an honest user can retry
         contactSetLastSend(0);
         contactWriteDailyLog(dailyLog);
-        return;
+        contactShowStatus("Failed to send — please try again or email aditwichaksana@gmail.com directly.", "error");
       }
-
-      contactShowStatus("Opening your mail client…", "ok");
-      window.location.href = mailtoUrl;
 
       // Lock the button and start the countdown
       contactUpdateLockUI();
