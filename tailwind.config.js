@@ -20,6 +20,9 @@ module.exports = {
         line: "rgb(var(--line) / <alpha-value>)",
         surface: "rgb(var(--surface) / <alpha-value>)",
         accent: "rgb(var(--accent) / <alpha-value>)",
+        pink: "rgb(var(--pink) / <alpha-value>)",
+        yellow: "rgb(var(--yellow) / <alpha-value>)",
+        onaccent: "rgb(var(--onaccent) / <alpha-value>)",
       },
       borderColor: {
         DEFAULT: "rgb(var(--line) / <alpha-value>)",
