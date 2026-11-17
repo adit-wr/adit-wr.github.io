@@ -11,28 +11,28 @@
 @layer base {
   :root {
     color-scheme: light;
-    --bg: 250 250 250;      /* paper white      */
-    --fg: 10 10 10;         /* ink black        */
-    --muted: 105 105 105;   /* secondary ink    */
-    --line: 219 219 219;    /* hairline rule    */
-    --surface: 255 255 255;
-    --accent: 56 189 248;   /* Electric Sky Blue — primary accent   */
-    --pink: 244 114 182;    /* Soft Rose Pink   — secondary accent  */
-    --yellow: 250 204 21;   /* Soft Amber       — tertiary accent   */
-    --onaccent: 10 10 10;   /* text on solid accent fills           */
+    --bg: 219 39 119;        /* Hot Pink #db2777      */
+    --fg: 255 255 255;       /* White ink             */
+    --muted: 249 168 212;    /* Pink-300 ink          */
+    --line: 244 114 182;     /* Pink-400 hairline     */
+    --surface: 236 72 153;   /* Pink-500 lifted       */
+    --accent: 255 255 255;   /* White — primary       */
+    --pink: 255 255 255;     /* White — secondary     */
+    --yellow: 255 255 255;   /* White — tertiary      */
+    --onaccent: 219 39 119;  /* Hot pink on white     */
   }
 
   html.dark {
     color-scheme: dark;
-    --bg: 10 10 10;
-    --fg: 245 245 245;
-    --muted: 150 150 150;
-    --line: 42 42 42;
-    --surface: 22 22 22;
-    --accent: 56 189 248;   /* Electric Sky Blue (Dark)  — primary accent */
-    --pink: 244 114 182;    /* Soft Rose Pink   (Dark)  — secondary accent */
-    --yellow: 250 204 21;   /* Soft Amber       (Dark)  — tertiary accent */
-    --onaccent: 10 10 10;   /* text on solid accent fills           */
+    --bg: 59 10 36;          /* Deep wine             */
+    --fg: 255 255 255;       /* White ink             */
+    --muted: 244 180 205;    /* Soft rose ink         */
+    --line: 118 44 76;       /* Wine hairline         */
+    --surface: 76 20 48;     /* Lifted wine           */
+    --accent: 255 255 255;   /* White — primary       */
+    --pink: 255 255 255;     /* White — secondary     */
+    --yellow: 255 255 255;   /* White — tertiary      */
+    --onaccent: 219 39 119;  /* Hot pink on white     */
   }
 
   html {
@@ -303,7 +303,7 @@ html.dark .form-status.error {
   inset: 0;
   z-index: 9999;
   overflow: hidden;
-  background: #050507;
+  background: rgb(var(--bg));
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 .splash.is-hidden {
@@ -380,11 +380,11 @@ html.dark .form-status.error {
   to { translate: 0 0; }
 }
 
-/* Swiss Base Colors: Electric Sky Blue (#38bdf8) & Deep Azure (#0284c7) */
+/* Hot pink family: White (horizon), Pale Rose (wide glow), Rose (deep glow), Black (depth) */
 .splash__arc-white  { --color: #fff;    --size: 1.32; box-shadow: 0 -4px 23px 0 #ffffffb5; }
 .splash__arc-purple,
-.splash__arc-cyan   { --color: #38bdf8; --size: 1.20; --delay: 0.6s; filter: blur(31px); }
-.splash__arc-blue   { --color: #0284c7; --size: 1.24; --delay: 0s;    filter: blur(24px); }
+.splash__arc-cyan   { --color: #f9a8d4; --size: 1.20; --delay: 0.6s; filter: blur(31px); }
+.splash__arc-blue   { --color: #f472b6; --size: 1.24; --delay: 0s;    filter: blur(24px); }
 .splash__arc-black  { --color: #000;    --size: 1.20; --delay: 0s;    filter: blur(51px); }
 
 .splash__content {
@@ -414,7 +414,7 @@ html.dark .form-status.error {
   animation: splash-title-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
 }
 .splash__subtitle {
-  color: #38bdf8;
+  color: rgba(255, 255, 255, 0.92);
   font-family: "Inter Tight", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 700;
   font-size: clamp(0.85rem, 2.2vw, 1.25rem);
