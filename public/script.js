@@ -459,17 +459,19 @@
             botcheck: honeypot ? honeypot.value : ""
           })
         });
-        const data = await response.json().catch(() => ({}));
+        const data = await response.json().catch(() => null);
 
-        if (response.ok && data.success) {
+        if (response.ok && data && data.success) {
           // Honeypot triggered server-side or genuine send — either way, show success
           contactShowStatus("Message sent — I will reply within 24 hours.", "ok");
           form.reset();
           if (subjectCounter) subjectCounter.textContent = "0 / 120";
           if (bodyCounter) bodyCounter.textContent = "0 / 1500";
         } else {
-          const msg = (data && data.message) ? String(data.message).trim().slice(0, 200) : "";
-          throw new Error(msg || "Web3Forms rejected the message");
+          const detail = (data && data.message)
+            ? String(data.message).trim().slice(0, 200)
+            : `HTTP ${response.status} dari /api/submit — pastikan dibuka lewat server (vercel dev / node scripts/dev-server.mjs), bukan file statis`;
+          throw new Error(detail);
         }
       } catch (err) {
         // Roll back the rate-limit entry so an honest user can retry

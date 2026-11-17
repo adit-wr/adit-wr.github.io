@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "npx tailwindcss -i ./src/input.css -o ./public/output.css"
+    "build": "npx tailwindcss -i ./src/input.css -o ./public/output.css",
+    "dev": "node scripts/dev-server.mjs"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.4"
