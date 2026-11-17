@@ -444,18 +444,20 @@
       const btn = document.getElementById("contact-submit-btn");
       const btnLabel = document.getElementById("contact-submit-label");
 
-      // 9) Ship it to /api/submit — serverless proxy, Web3Forms key never reaches the browser
+      // 9) Ship it to Web3Forms — client-side plan (Web3Forms free tier blocks server-side calls)
       contactShowStatus("Sending message…", "ok");
       if (btn) btn.disabled = true;
       if (btnLabel) btnLabel.textContent = "Sending…";
 
       try {
-        const response = await fetch("/api/submit", {
+        const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json", "Accept": "application/json" },
           body: JSON.stringify({
+            access_key: (document.getElementById("web3forms-access-key") || {}).value || "",
             subject,
             message: body,
+            from_name: "Portfolio Contact Form",
             botcheck: honeypot ? honeypot.value : ""
           })
         });
@@ -470,7 +472,7 @@
         } else {
           const detail = (data && data.message)
             ? String(data.message).trim().slice(0, 200)
-            : `HTTP ${response.status} dari /api/submit — pastikan dibuka lewat server (vercel dev / node scripts/dev-server.mjs), bukan file statis`;
+            : `HTTP ${response.status} — coba lagi, atau email langsung ke aditwichaksana@gmail.com`;
           throw new Error(detail);
         }
       } catch (err) {

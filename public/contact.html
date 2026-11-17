@@ -234,7 +234,10 @@
           <h3 class="headline mt-3 text-2xl font-black uppercase tracking-[-0.03em]">Write an Inquiry</h3>
           <p class="mt-2 text-sm text-muted">Fill in your message below to compose directly to my inbox.</p>
 
-          <form id="contact-form" action="/api/submit" method="POST" class="mt-8 flex flex-col gap-6" autocomplete="off" novalidate>
+          <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="mt-8 flex flex-col gap-6" autocomplete="off" novalidate>
+            <!-- Web3Forms access key — public by design (client-side plan, see https://web3forms.com) -->
+            <input type="hidden" id="web3forms-access-key" name="access_key" value="4d3e61c8-693d-40cf-9516-176317792719">
+            <input type="hidden" name="from_name" value="Portfolio Contact Form">
             <!-- Honeypot: invisible to humans, traps bots & spam scripts -->
             <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
               <label for="contact-website">Website (leave empty)</label>
