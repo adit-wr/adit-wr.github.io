@@ -143,7 +143,7 @@
     });
 
     clockElements.forEach((el) => {
-      el.innerHTML = `<span class="font-light tracking-wide text-muted">Surakarta</span> <span class="font-mono font-bold text-accent">${timeStr}</span> <span class="font-normal text-muted">WIB</span>`;
+      el.innerHTML = `<span class="hidden ltp:inline font-light tracking-wide text-muted">Surakarta</span> <span class="font-mono font-bold text-accent">${timeStr}</span> <span class="font-normal text-muted">WIB</span>`;
     });
   }
 

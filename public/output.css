@@ -2221,6 +2221,10 @@ html.dark .form-status.error {
 }
 
 @media (min-width: 901px) {
+  .ltp\:inline {
+    display: inline;
+  }
+
   .ltp\:hidden {
     display: none;
   }
