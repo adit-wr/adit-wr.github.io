@@ -345,6 +345,7 @@
     // Wipe any stale state from a previous PJAX navigation
     form._hasSubmitListener = false;
 
+    const emailInput = document.getElementById("contact-email");
     const subjectInput = document.getElementById("contact-subject");
     const bodyInput = document.getElementById("contact-body");
     const subjectCounter = document.getElementById("subject-counter");
@@ -403,18 +404,26 @@
         return;
       }
 
+      const rawEmail = emailInput ? emailInput.value : "";
       const rawSubject = subjectInput ? subjectInput.value : "";
       const rawBody = bodyInput ? bodyInput.value : "";
 
       // 4) Required-field check (defence in depth on top of HTML5 required)
-      if (!rawSubject.trim() || !rawBody.trim()) {
-        contactShowStatus("Subject and message are required.", "error");
+      if (!rawEmail.trim() || !rawSubject.trim() || !rawBody.trim()) {
+        contactShowStatus("Email, subject and message are required.", "error");
         return;
       }
 
       // 5) Sanitize
+      const email = contactSanitize(rawEmail).slice(0, 254).toLowerCase();
       const subject = contactSanitize(rawSubject).slice(0, 120);
       const body = contactSanitize(rawBody).slice(0, 1500);
+
+      // 5b) Email format check (blocks header injection + broken addresses)
+      if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(email) || contactHasHeaderInjection(email)) {
+        contactShowStatus("Please enter a valid email address.", "error");
+        return;
+      }
 
       // 6) Header injection / XSS payload detection
       if (contactHasHeaderInjection(subject)) {
@@ -457,6 +466,7 @@
             access_key: (document.getElementById("web3forms-access-key") || {}).value || "",
             subject,
             message: body,
+            email,
             from_name: "Portfolio Contact Form",
             botcheck: honeypot ? honeypot.value : ""
           })
